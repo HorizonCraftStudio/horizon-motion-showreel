@@ -16,6 +16,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
 }) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [closing, setClosing] = useState(false);
+  const [readyMedia, setReadyMedia] = useState<Partial<Record<"film1" | "film2" | "image1" | "image2", boolean>>>({});
   const animationRef = useRef<Animation | null>(null);
 
   useLayoutEffect(() => {
@@ -33,7 +34,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
     const animation = title.animate([
       { transform: closing ? currentTransform : originTransform },
       { transform: closing ? originTransform : "translate(0, 0) scale(1)" },
-    ], { duration: closing ? 420 : 680, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "both" });
+    ], { duration: closing ? 420 : 1150, easing: closing ? "cubic-bezier(0.22, 1, 0.36, 1)" : "cubic-bezier(0.45, 0, 0.2, 1)", fill: "both" });
     animationRef.current = animation;
     if (closing) animation.onfinish = onClose;
     return () => { animation.onfinish = null; animation.cancel(); };
@@ -62,23 +63,23 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
             <div className="showcase-media">
               {selection.service.showcase === "film" ? (
                 <div className="showcase-films">
-                  <figure>
-                    <iframe src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ" title="Temporary film sample — Big Buck Bunny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                  <figure data-ready={Boolean(readyMedia.film1)}>
+                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ" title="Temporary film sample — Big Buck Bunny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                     <figcaption>Big Buck Bunny <span>Temporary film sample</span></figcaption>
                   </figure>
-                  <figure>
-                    <iframe src="https://www.youtube-nocookie.com/embed/R6MlUcmOul8" title="Temporary film sample — Tears of Steel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                  <figure data-ready={Boolean(readyMedia.film2)}>
+                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/R6MlUcmOul8" title="Temporary film sample — Tears of Steel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                     <figcaption>Tears of Steel <span>Temporary film sample</span></figcaption>
                   </figure>
                 </div>
               ) : (
                 <div className="showcase-images">
-                  <figure>
-                    <img src={productImage} alt="Silver headphones with green fabric cushions, complete product view" width={1440} height={1024} loading="lazy" />
+                  <figure data-ready={Boolean(readyMedia.image1)}>
+                    <img onLoad={() => setReadyMedia((ready) => ({ ...ready, image1: true }))} src={productImage} alt="Silver headphones with green fabric cushions, complete product view" width={1440} height={1024} loading="lazy" />
                     <figcaption>Product view <span>Temporary image sample</span></figcaption>
                   </figure>
-                  <figure>
-                    <img src={detailImage} alt="Close-up of brushed aluminum earcup and green fabric cushion" width={1440} height={1024} loading="lazy" />
+                  <figure data-ready={Boolean(readyMedia.image2)}>
+                    <img onLoad={() => setReadyMedia((ready) => ({ ...ready, image2: true }))} src={detailImage} alt="Close-up of brushed aluminum earcup and green fabric cushion" width={1440} height={1024} loading="lazy" />
                     <figcaption>Material detail <span>Temporary image sample</span></figcaption>
                   </figure>
                 </div>
