@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
 });
 
 const clients = [
-  { name: "Apolnus", logo: apolnusLogo, height: "38px" },
+  { name: "Apolnus", logo: apolnusLogo, height: "62px" },
   { name: "Brave", logo: braveLogo, height: "46px" },
   { name: "Kreo", logo: kreoLogo, height: "38px" },
   { name: "Keiretsu Forum", logo: keiretsuLogo, height: "72px" },
