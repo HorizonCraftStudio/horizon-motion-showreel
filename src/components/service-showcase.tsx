@@ -14,13 +14,12 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
   onClose: () => void;
   onLogo: () => void;
 }) {
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [title, setTitle] = useState<HTMLHeadingElement | null>(null);
   const [closing, setClosing] = useState(false);
   const [readyMedia, setReadyMedia] = useState<Partial<Record<"film1" | "film2" | "image1" | "image2", boolean>>>({});
   const animationRef = useRef<Animation | null>(null);
 
   useLayoutEffect(() => {
-    const title = titleRef.current;
     if (!title) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       if (closing) onClose();
@@ -34,11 +33,11 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
     const animation = title.animate([
       { transform: closing ? currentTransform : originTransform },
       { transform: closing ? originTransform : "translate(0, 0) scale(1)" },
-    ], { duration: closing ? 420 : 1150, easing: closing ? "cubic-bezier(0.22, 1, 0.36, 1)" : "cubic-bezier(0.45, 0, 0.2, 1)", fill: "both" });
+    ], { duration: closing ? 420 : 1800, easing: closing ? "cubic-bezier(0.22, 1, 0.36, 1)" : "cubic-bezier(0.4, 0, 0.6, 1)", fill: "both" });
     animationRef.current = animation;
     if (closing) animation.onfinish = onClose;
     return () => { animation.onfinish = null; animation.cancel(); };
-  }, [selection, closing, onClose]);
+  }, [title, selection, closing, onClose]);
 
   const close = () => setClosing(true);
 
@@ -59,7 +58,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
             </Button>
           </div>
           <div className="showcase-body">
-            <Dialog.Title ref={titleRef} className="showcase-title">{selection.service.title}</Dialog.Title>
+            <Dialog.Title ref={setTitle} className="showcase-title">{selection.service.title}</Dialog.Title>
             <div className="showcase-media">
               {selection.service.showcase === "film" ? (
                 <div className="showcase-films">
