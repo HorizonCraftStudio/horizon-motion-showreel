@@ -33,7 +33,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
     const animation = title.animate([
       { transform: closing ? currentTransform : originTransform },
       { transform: closing ? originTransform : "translate(0, 0) scale(1)" },
-    ], { duration: closing ? 420 : 1800, easing: closing ? "cubic-bezier(0.22, 1, 0.36, 1)" : "cubic-bezier(0.4, 0, 0.6, 1)", fill: "both" });
+    ], { duration: 420, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "both" });
     animationRef.current = animation;
     if (closing) animation.onfinish = onClose;
     return () => { animation.onfinish = null; animation.cancel(); };
