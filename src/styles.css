@@ -392,21 +392,16 @@
 
 .client-logo {
   align-items: center;
-  color: var(--studio-ink);
   display: inline-flex;
-  font-family: var(--font-display);
-  font-size: 26px;
-  gap: 12px;
-  opacity: 0.55;
-  white-space: nowrap;
+  height: 72px;
 }
 
-.client-glyph {
-  border: 2px solid currentColor;
-  border-radius: 50% 0 50% 50%;
-  display: inline-block;
-  height: 22px;
-  width: 22px;
+.client-mark {
+  display: block;
+  height: var(--logo-h, 34px);
+  object-fit: contain;
+  opacity: 0.8;
+  width: auto;
 }
 
 .services {
@@ -562,8 +557,9 @@
     gap: 56px;
   }
 
-  .client-logo {
-    font-size: 20px;
+  .client-mark {
+    height: calc(var(--logo-h, 34px) * 0.72);
+    opacity: 0.58;
   }
 
   .studio-footer {

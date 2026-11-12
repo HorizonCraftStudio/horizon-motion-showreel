@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
+import apolnusLogo from "@/assets/apolnus-logo.png.asset.json";
+import braveLogo from "@/assets/brave-logo.png.asset.json";
+import keiretsuLogo from "@/assets/keiretsu-forum-logo.png.asset.json";
+import kreoLogo from "@/assets/kreo-logo.png.asset.json";
+import mortCoLogo from "@/assets/mort-co-logo.png.asset.json";
+import qalzyLogo from "@/assets/qalzy-logo.png.asset.json";
 import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
 import studioReel from "@/assets/horizoncraft-showreel.mp4.asset.json";
 import { introProgressFromScroll } from "@/lib/intro-scroll";
@@ -27,7 +33,14 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const clientLogos = ["Northwind", "Lumen", "Axiom Labs", "Vertex", "Orbitra"];
+const clients = [
+  { name: "Apolnus", logo: apolnusLogo, height: "38px" },
+  { name: "Brave", logo: braveLogo, height: "46px" },
+  { name: "Kreo", logo: kreoLogo, height: "38px" },
+  { name: "Keiretsu Forum", logo: keiretsuLogo, height: "72px" },
+  { name: "Mort & Co", logo: mortCoLogo, height: "28px" },
+  { name: "Qalzy", logo: qalzyLogo, height: "38px" },
+];
 
 const services = [
   {
@@ -191,10 +204,18 @@ function Index() {
             <span className="section-label">Trusted by</span>
             <div className="logo-marquee">
               <div className="logo-track">
-                {[...clientLogos, ...clientLogos].map((name, i) => (
-                  <span className="client-logo" key={i} aria-hidden={i >= clientLogos.length}>
-                    <span className="client-glyph" />
-                    {name}
+                {[...clients, ...clients].map((client, i) => (
+                  <span
+                    className="client-logo"
+                    key={i}
+                    aria-hidden={i >= clients.length}
+                  >
+                    <img
+                      className="client-mark"
+                      src={client.logo.url}
+                      alt={client.name}
+                      style={{ "--logo-h": client.height } as React.CSSProperties}
+                    />
                   </span>
                 ))}
               </div>
