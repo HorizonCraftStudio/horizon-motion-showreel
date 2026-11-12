@@ -52,6 +52,8 @@ function Index() {
   const brandRef = useRef<HTMLDivElement>(null);
   const reelRef = useRef<HTMLVideoElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const servicesRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const node = nextRef.current;
@@ -76,7 +78,9 @@ function Index() {
     const sequence = sequenceRef.current;
     const brand = brandRef.current;
     const reel = reelRef.current;
-    if (!sequence || !brand || !reel) return;
+    const header = headerRef.current;
+    const servicesBlock = servicesRef.current;
+    if (!sequence || !brand || !reel || !header || !servicesBlock) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frameId = 0;
@@ -111,6 +115,19 @@ function Index() {
       brand.style.transform = `translate(${mix(-50, 0)}%, ${mix(-50, 0)}%)`;
       sequence.style.setProperty("--reveal", String(eased));
 
+      // Pin header over the white sections once the showreel scrolls away
+      const sequenceBottom = sequence.getBoundingClientRect().bottom;
+      const pin = clamp((110 - sequenceBottom) / 110);
+      header.style.setProperty("--pin", String(pin));
+      header.style.setProperty("--reveal", String(eased * (1 - pin)));
+
+      // Services fade in as a full screen panel
+      const servicesTop = servicesBlock.getBoundingClientRect().top;
+      const servicesIn = reducedMotion.matches
+        ? 1
+        : smoothStep(clamp((window.innerHeight - servicesTop) / window.innerHeight));
+      servicesBlock.style.setProperty("--services-in", String(servicesIn));
+
       if (eased > 0.4 && !isPlaying) {
         isPlaying = true;
         void reel.play().catch(() => {
@@ -142,6 +159,13 @@ function Index() {
 
   return (
     <main className="studio-page">
+      <header className="studio-header" ref={headerRef}>
+        <div className="brand-lockup" ref={brandRef}>
+          <img className="brand-mark" src={studioMark.url} alt="" />
+          <span className="brand-name">Horizoncraft Studio</span>
+        </div>
+        <span className="header-specialty">3D motion design</span>
+      </header>
       <section className="studio-sequence" ref={sequenceRef} aria-label="Horizoncraft Studio">
         <div className="studio-stage">
           <video
@@ -157,13 +181,6 @@ function Index() {
           </video>
           <div className="reel-shade" aria-hidden="true" />
 
-          <header className="studio-header">
-            <div className="brand-lockup" ref={brandRef}>
-              <img className="brand-mark" src={studioMark.url} alt="" />
-              <span className="brand-name">Horizoncraft Studio</span>
-            </div>
-            <span className="header-specialty">3D motion design</span>
-          </header>
 
           <div className="reel-caption">
             <span className="caption-index">Independent studio</span>
@@ -192,18 +209,33 @@ function Index() {
           </div>
         </section>
 
-        <section className="services fade-in" aria-labelledby="services-title">
-          <span className="section-label">Services</span>
-          <h2 id="services-title">What we make</h2>
-          <ol className="service-list">
-            {services.map((service, i) => (
-              <li key={service.title}>
-                <span className="service-index">0{i + 1}</span>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-              </li>
-            ))}
-          </ol>
+        <section
+          className="services-sequence"
+          ref={servicesRef}
+          aria-labelledby="services-title"
+        >
+          <div className="services">
+            <span className="section-label">Services</span>
+            <h2 id="services-title">What we make</h2>
+            <ol className="service-list">
+              {services.map((service, i) => (
+                <li key={service.title}>
+                  <span className="service-index">0{i + 1}</span>
+                  <h3>{service.title}</h3>
+                  <p>{service.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="contact fade-in" aria-labelledby="contact-title">
+          <span className="section-label">Contact</span>
+          <h2 id="contact-title">Let's make something move.</h2>
+          <div className="contact-links">
+            <a href="mailto:hello@horizoncraft.studio">hello@horizoncraft.studio</a>
+            <a href="tel:+910000000000">+91 00000 00000</a>
+          </div>
         </section>
       </div>
 

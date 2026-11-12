@@ -231,8 +231,19 @@
   justify-content: flex-end;
   padding: 28px 38px;
   pointer-events: none;
+  position: fixed;
+  z-index: 50;
+}
+
+.studio-header::before {
+  background: var(--studio-paper);
+  border-bottom: 1px solid var(--studio-rule);
+  content: "";
+  height: 84px;
+  inset: 0 0 auto;
+  opacity: var(--pin, 0);
   position: absolute;
-  z-index: 2;
+  z-index: -1;
 }
 
 .brand-lockup {
@@ -267,11 +278,15 @@
 }
 
 .header-specialty {
-  color: var(--studio-white);
+  color: color-mix(
+    in oklab,
+    var(--studio-ink),
+    var(--studio-white) calc(var(--reveal) * 100%)
+  );
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
-  opacity: var(--reveal);
+  opacity: max(var(--reveal), var(--pin, 0));
   padding-top: 4px;
   text-transform: uppercase;
   transition: opacity 420ms ease;
@@ -387,10 +402,49 @@
   width: 22px;
 }
 
+.services-sequence {
+  height: 200svh;
+  position: relative;
+}
+
 .services {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  justify-content: center;
+  opacity: var(--services-in, 0);
+  padding: 84px 38px 0;
+  position: sticky;
+  top: 0;
+  transform: scale(calc(0.96 + var(--services-in, 0) * 0.04));
+}
+
+.contact {
   border-top: 1px solid var(--studio-rule);
   margin: 0 38px;
   padding: 96px 0 120px;
+}
+
+.contact h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  margin: 16px 0 40px;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 48px;
+}
+
+.contact-links a {
+  border-bottom: 1px solid var(--studio-ink);
+  color: var(--studio-ink);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 30px);
+  padding-bottom: 4px;
+  text-decoration: none;
 }
 
 .services h2 {
@@ -493,6 +547,10 @@
   }
 
   .services {
+    padding: 72px 18px 0;
+  }
+
+  .contact {
     margin: 0 18px;
     padding: 72px 0 88px;
   }
