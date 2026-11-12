@@ -35,7 +35,7 @@ const services = [
     text: "Cinematic 3D films that introduce your product to the world.",
   },
   {
-    title: "Complete product PDP",
+    title: "Product PDP",
     text: "Every render, loop and detail view your product page needs.",
   },
   {
