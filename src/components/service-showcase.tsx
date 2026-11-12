@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowLeft } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
 import productImage from "@/assets/pdp-headphones.jpg";
@@ -15,30 +15,45 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
   onLogo: () => void;
 }) {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [closing, setClosing] = useState(false);
+  const animationRef = useRef<Animation | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const title = titleRef.current;
-    if (!title || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!title) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (closing) onClose();
+      return;
+    }
+    const currentTransform = getComputedStyle(title).transform;
+    animationRef.current?.cancel();
     const target = title.getBoundingClientRect();
+    const scale = Number.parseFloat(getComputedStyle(selection.trigger).fontSize) / Number.parseFloat(getComputedStyle(title).fontSize);
+    const originTransform = `translate(${selection.origin.left - target.left}px, ${selection.origin.top - target.top}px) scale(${scale})`;
     const animation = title.animate([
-      { transform: `translate(${selection.origin.left - target.left}px, ${selection.origin.top - target.top}px) scale(${22 / Number.parseFloat(getComputedStyle(title).fontSize)})` },
-      { transform: "translate(0, 0) scale(1)" },
-    ], { duration: 550, easing: "cubic-bezier(0.65, 0, 0.35, 1)" });
-    return () => animation.cancel();
-  }, [selection]);
+      { transform: closing ? currentTransform : originTransform },
+      { transform: closing ? originTransform : "translate(0, 0) scale(1)" },
+    ], { duration: closing ? 420 : 680, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "both" });
+    animationRef.current = animation;
+    if (closing) animation.onfinish = onClose;
+    return () => { animation.onfinish = null; animation.cancel(); };
+  }, [selection, closing, onClose]);
+
+  const close = () => setClosing(true);
 
   return (
-    <Dialog.Root open onOpenChange={(open) => { if (!open) onClose(); }}>
+    <Dialog.Root open onOpenChange={(open) => { if (!open) close(); }}>
       <Dialog.Portal>
-        <Dialog.Overlay className="showcase-backdrop" />
-        <Dialog.Content className="service-showcase" aria-describedby={undefined}
+        <Dialog.Overlay className="showcase-backdrop" data-closing={closing} />
+        <Dialog.Content className="service-showcase" data-closing={closing} aria-describedby={undefined}
+          onEscapeKeyDown={(event) => { event.preventDefault(); close(); }}
           onCloseAutoFocus={(event) => { event.preventDefault(); selection.trigger.focus({ preventScroll: true }); }}>
           <div className="showcase-header">
             <Button variant="ghost" className="showcase-brand" onClick={onLogo} aria-label="Back to the Horizoncraft Studio logo">
               <img src={studioMark.url} alt="" />
               <span>Horizoncraft Studio</span>
             </Button>
-            <Button variant="ghost" size="icon" onClick={onClose} aria-label="Back to services" title="Back to services">
+            <Button variant="ghost" size="icon" onClick={close} aria-label="Back to services" title="Back to services">
               <ArrowLeft />
             </Button>
           </div>

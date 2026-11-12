@@ -631,16 +631,22 @@
 }
 
 .studio-page.has-service .studio-header { visibility: hidden; }
-.studio-page.has-service .studio-sequence,
-.studio-page.has-service > div,
-.studio-page.has-service .studio-footer { opacity: 0; }
 
 .showcase-backdrop {
   position: fixed;
   inset: 0;
   z-index: 60;
   background: var(--studio-paper);
-  animation: showcase-fade 250ms ease both;
+  animation: showcase-fade 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.showcase-backdrop[data-closing="true"] {
+  animation: showcase-fade-out 420ms ease both;
+}
+.service-showcase[data-closing="true"] .showcase-media,
+.service-showcase[data-closing="true"] .showcase-header {
+  animation: showcase-fade-out 220ms ease both;
+  pointer-events: none;
 }
 
 .service-showcase {
@@ -680,8 +686,9 @@
   letter-spacing: 0;
   margin: 0 0 48px;
   transform-origin: top left;
+  will-change: transform;
 }
-.showcase-media { animation: showcase-fade 420ms 280ms ease both; }
+.showcase-media { animation: showcase-media-in 580ms 260ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 .showcase-films,
 .showcase-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .showcase-media figure { margin: 0; min-width: 0; }
@@ -696,6 +703,11 @@
 .showcase-media figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13px; margin-top: 14px; }
 .showcase-media figcaption span { color: var(--studio-muted); font-size: 11px; }
 @keyframes showcase-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes showcase-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes showcase-media-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @media (max-width: 640px) {
   .showcase-header { height: 70px; padding: 0 18px; }
   .showcase-brand { width: 248px; max-width: calc(100% - 44px); gap: 8px; }
@@ -705,5 +717,7 @@
   .showcase-films, .showcase-images { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .showcase-backdrop, .showcase-media { animation: none; }
+  .showcase-backdrop, .showcase-media,
+  .service-showcase[data-closing="true"] .showcase-header,
+  .service-showcase[data-closing="true"] .showcase-media { animation: none; }
 }
