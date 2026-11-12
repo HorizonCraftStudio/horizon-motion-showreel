@@ -492,6 +492,14 @@
 @media (max-width: 640px) {
   .studio-sequence {
     height: 180svh;
+    --reel-inset: 16px;
+  }
+
+  .studio-reel,
+  .reel-shade {
+    height: calc(100% - (var(--reel-inset) * 2));
+    inset: var(--reel-inset);
+    width: calc(100% - (var(--reel-inset) * 2));
   }
 
   .studio-header {
