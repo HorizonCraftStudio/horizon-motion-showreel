@@ -139,7 +139,7 @@ function Index() {
 
       <footer className="studio-footer">
         <span>Horizoncraft Studio</span>
-        <span>Independent 3D motion design</span>
+        <span>3D motion design agency</span>
       </footer>
     </main>
   );
