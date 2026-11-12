@@ -177,7 +177,7 @@
 
 .studio-sequence {
   --reveal: 0;
-  height: 300svh;
+  height: 200svh;
   position: relative;
   background: var(--studio-paper);
 }
@@ -448,7 +448,7 @@
 
 @media (max-width: 640px) {
   .studio-sequence {
-    height: 260svh;
+    height: 180svh;
   }
 
   .studio-header {

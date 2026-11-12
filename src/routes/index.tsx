@@ -88,10 +88,10 @@ function Index() {
       const scrollIntoSequence = -sequence.getBoundingClientRect().top;
       const rawProgress = introProgressFromScroll(
         scrollIntoSequence,
-        sequenceTravel * 0.5,
-      ); // second half of travel holds the open reel
+        sequenceTravel * 0.8,
+      ); // reveal finishes just before the sequence ends, no hold
       const eased = reducedMotion.matches
-        ? rawProgress > 0.56
+        ? rawProgress > 0.45
           ? 1
           : 0
         : smoothStep(rawProgress);
