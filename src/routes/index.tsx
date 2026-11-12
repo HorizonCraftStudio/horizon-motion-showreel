@@ -53,7 +53,7 @@ const services = [
   },
   {
     title: "Website hero section animation",
-    text: "Scroll-ready 3D motion that makes your homepage unforgettable.",
+    text: "Scroll-ready 3D animation ready to integrate into your homepage.",
   },
 ];
 
