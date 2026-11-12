@@ -618,3 +618,92 @@
 .studio-page.is-resetting .frame-count {
   transition: none;
 }
+
+/* Service titles travel into an unframed, full-screen portfolio view. */
+.service-name-button {
+  display: inline;
+  height: auto;
+  padding: 0;
+  white-space: normal;
+  text-align: left;
+  font: inherit;
+  border-radius: 0;
+}
+
+.studio-page.has-service .studio-header { visibility: hidden; }
+.studio-page.has-service .studio-sequence,
+.studio-page.has-service > div,
+.studio-page.has-service .studio-footer { opacity: 0; }
+
+.showcase-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--studio-paper);
+  animation: showcase-fade 250ms ease both;
+}
+
+.service-showcase {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  overflow-y: auto;
+  color: var(--studio-ink);
+  outline: none;
+}
+
+.showcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 84px;
+  padding: 0 36px;
+}
+
+.showcase-brand {
+  width: 274px;
+  justify-content: flex-start;
+  padding: 0;
+  gap: 12px;
+  height: auto;
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+}
+.showcase-brand:hover { background: transparent; }
+.showcase-brand img { width: 30%; height: auto; }
+.showcase-body { padding: 30px 36px 64px; }
+.showcase-title {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: 0;
+  margin: 0 0 48px;
+  transform-origin: top left;
+}
+.showcase-media { animation: showcase-fade 420ms 280ms ease both; }
+.showcase-films,
+.showcase-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.showcase-media figure { margin: 0; min-width: 0; }
+.showcase-films iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: 0;
+  background: var(--studio-ink);
+}
+.showcase-images img { width: 100%; height: auto; display: block; aspect-ratio: 1440 / 1024; object-fit: cover; }
+.showcase-media figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13px; margin-top: 14px; }
+.showcase-media figcaption span { color: var(--studio-muted); font-size: 11px; }
+@keyframes showcase-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 640px) {
+  .showcase-header { height: 70px; padding: 0 18px; }
+  .showcase-brand { width: 248px; max-width: calc(100% - 44px); gap: 8px; }
+  .showcase-brand img { width: 26%; }
+  .showcase-body { padding: 24px 18px 40px; }
+  .showcase-title { font-size: 36px; margin-bottom: 32px; }
+  .showcase-films, .showcase-images { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase-backdrop, .showcase-media { animation: none; }
+}

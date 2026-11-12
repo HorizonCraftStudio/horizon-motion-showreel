@@ -1,0 +1,3 @@
+- [x] Animate Product launch film and Product PDP into full-screen showcases.
+- [x] Add temporary YouTube films and Product PDP images; leave the third service unchanged.
+- [x] Verify opening, closing, logo return, and mobile layout.

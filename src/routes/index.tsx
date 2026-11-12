@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ServiceShowcase, type ServiceSelection } from "@/components/service-showcase";
+import { services } from "@/lib/services";
 
 import apolnusLogo from "@/assets/apolnus-logo.png.asset.json";
 import braveLogo from "@/assets/brave-logo.png.asset.json";
@@ -42,21 +45,6 @@ const clients = [
   { name: "Qalzy", logo: qalzyLogo, height: "38px" },
 ];
 
-const services = [
-  {
-    title: "Product launch film",
-    text: "Cinematic 3D films that introduce your product to the world.",
-  },
-  {
-    title: "Product PDP",
-    text: "Every render, loop and detail view your product page needs.",
-  },
-  {
-    title: "Website hero section animation",
-    text: "Scroll-ready 3D animation ready to integrate into your homepage.",
-  },
-];
-
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const smoothStep = (value: number) => value * value * (3 - 2 * value);
 
@@ -74,6 +62,7 @@ const placeBrand = (brand: HTMLDivElement, eased: number) => {
 };
 
 function Index() {
+  const [selection, setSelection] = useState<ServiceSelection | null>(null);
   const sequenceRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
   const reelRef = useRef<HTMLVideoElement>(null);
@@ -186,7 +175,7 @@ function Index() {
   }, []);
 
   return (
-    <main className="studio-page" ref={pageRef}>
+    <main className={`studio-page${selection ? " has-service" : ""}`} ref={pageRef}>
       <header className="studio-header" ref={headerRef}>
         <div
           className="brand-lockup"
@@ -265,7 +254,14 @@ function Index() {
               {services.map((service, i) => (
                 <li key={service.title}>
                   <span className="service-index">0{i + 1}</span>
-                  <h3>{service.title}</h3>
+                  <h3>
+                    {service.showcase ? (
+                      <Button variant="link" className="service-name-button" onClick={(event) => {
+                        setSelection({ service, origin: event.currentTarget.getBoundingClientRect(), trigger: event.currentTarget });
+                        reelRef.current?.pause();
+                      }}>{service.title}</Button>
+                    ) : service.title}
+                  </h3>
                   <p>{service.text}</p>
                 </li>
               ))}
@@ -287,6 +283,10 @@ function Index() {
         <span>Horizoncraft Studio</span>
         <span>3D motion design agency</span>
       </footer>
+      {selection && <ServiceShowcase selection={selection} onClose={() => setSelection(null)} onLogo={() => {
+        setSelection(null);
+        returnToLogo();
+      }} />}
     </main>
   );
 }
