@@ -631,6 +631,12 @@
 }
 
 .studio-page.has-service .studio-header { visibility: hidden; }
+.studio-page.has-service.is-returning .studio-header { visibility: visible; z-index: 80; }
+.service-showcase[data-logo-returning="true"] { pointer-events: none; }
+.service-showcase[data-logo-returning="true"] .showcase-header { visibility: hidden; }
+.service-showcase[data-logo-returning="true"] .showcase-body {
+  animation: showcase-fade-out 250ms ease both;
+}
 
 .showcase-backdrop {
   position: fixed;

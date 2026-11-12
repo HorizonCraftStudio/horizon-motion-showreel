@@ -70,11 +70,20 @@ function Index() {
   const headerRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
 
-  const returnToLogo = () => {
+  const returnToLogo = (origin?: DOMRect) => {
     const page = pageRef.current;
     const brand = brandRef.current;
     if (!page || !brand || page.classList.contains("is-returning")) return;
-    if (window.scrollY < 4) return;
+    if (window.scrollY < 4 && !origin) return;
+    if (origin) {
+      // Hand off the visible modal logo to the shared animated logo without a jump.
+      brand.style.width = `${origin.width}px`;
+      brand.style.left = `${origin.left}px`;
+      brand.style.top = `${origin.top}px`;
+      brand.style.transform = "translate(0, 0)";
+      brand.style.setProperty("--brand-size", "19px");
+      void brand.offsetWidth;
+    }
     // Logo starts growing immediately, in parallel with the page fading out
     page.classList.add("is-returning");
     placeBrand(brand, 0);
@@ -85,6 +94,7 @@ function Index() {
       sequenceRef.current?.style.setProperty("--reveal", "0");
       headerRef.current?.style.setProperty("--reveal", "0");
       headerRef.current?.style.setProperty("--pin", "0");
+      setSelection(null);
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     }, 560);
     window.setTimeout(() => page.classList.remove("is-returning", "is-resetting"), 760);
@@ -183,7 +193,7 @@ function Index() {
           role="button"
           tabIndex={0}
           aria-label="Back to the Horizoncraft Studio logo"
-          onClick={returnToLogo}
+          onClick={() => returnToLogo()}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
@@ -283,10 +293,7 @@ function Index() {
         <span>Horizoncraft Studio</span>
         <span>3D motion design agency</span>
       </footer>
-      {selection && <ServiceShowcase selection={selection} onClose={() => setSelection(null)} onLogo={() => {
-        setSelection(null);
-        returnToLogo();
-      }} />}
+      {selection && <ServiceShowcase selection={selection} onClose={() => setSelection(null)} onLogo={returnToLogo} />}
     </main>
   );
 }

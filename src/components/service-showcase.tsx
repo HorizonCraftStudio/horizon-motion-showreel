@@ -12,10 +12,11 @@ export type ServiceSelection = { service: ShowcaseService; origin: DOMRect; trig
 export function ServiceShowcase({ selection, onClose, onLogo }: {
   selection: ServiceSelection;
   onClose: () => void;
-  onLogo: () => void;
+  onLogo: (origin: DOMRect) => void;
 }) {
   const [title, setTitle] = useState<HTMLHeadingElement | null>(null);
   const [closing, setClosing] = useState(false);
+  const [logoReturning, setLogoReturning] = useState(false);
   const [readyMedia, setReadyMedia] = useState<Partial<Record<"film1" | "film2" | "image1" | "image2", boolean>>>({});
   const animationRef = useRef<Animation | null>(null);
 
@@ -45,11 +46,15 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
     <Dialog.Root open onOpenChange={(open) => { if (!open) close(); }}>
       <Dialog.Portal>
         <Dialog.Overlay className="showcase-backdrop" data-closing={closing} />
-        <Dialog.Content className="service-showcase" data-closing={closing} aria-describedby={undefined}
+        <Dialog.Content className="service-showcase" data-closing={closing} data-logo-returning={logoReturning} aria-describedby={undefined}
           onEscapeKeyDown={(event) => { event.preventDefault(); close(); }}
-          onCloseAutoFocus={(event) => { event.preventDefault(); selection.trigger.focus({ preventScroll: true }); }}>
+          onCloseAutoFocus={(event) => { event.preventDefault(); if (!logoReturning) selection.trigger.focus({ preventScroll: true }); }}>
           <div className="showcase-header">
-            <Button variant="ghost" className="showcase-brand" onClick={onLogo} aria-label="Back to the Horizoncraft Studio logo">
+            <Button variant="ghost" className="showcase-brand" onClick={(event) => {
+              if (logoReturning) return;
+              setLogoReturning(true);
+              onLogo(event.currentTarget.getBoundingClientRect());
+            }} aria-label="Back to the Horizoncraft Studio logo">
               <img src={studioMark.url} alt="" />
               <span>Horizoncraft Studio</span>
             </Button>
