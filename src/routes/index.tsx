@@ -168,7 +168,6 @@ function Index() {
           <img className="brand-mark" src={studioMark.url} alt="" />
           <span className="brand-name">Horizoncraft Studio</span>
         </div>
-        <span className="header-specialty">3D motion design</span>
       </header>
       <section className="studio-sequence" ref={sequenceRef} aria-label="Horizoncraft Studio">
         <div className="studio-stage">

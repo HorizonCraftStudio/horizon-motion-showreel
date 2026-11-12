@@ -277,21 +277,6 @@
   white-space: nowrap;
 }
 
-.header-specialty {
-  color: color-mix(
-    in oklab,
-    var(--studio-ink),
-    var(--studio-white) calc(var(--reveal) * 100%)
-  );
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  opacity: max(var(--reveal), var(--pin, 0));
-  padding-top: 4px;
-  text-transform: uppercase;
-  transition: opacity 420ms ease;
-}
-
 .reel-caption {
   bottom: clamp(38px, 8vh, 96px);
   color: var(--studio-white);
@@ -517,11 +502,6 @@
 
   .brand-name {
     font-size: var(--brand-size, 19px);
-  }
-
-  .header-specialty {
-    font-size: 9px;
-    padding-top: 2px;
   }
 
   .reel-caption {
