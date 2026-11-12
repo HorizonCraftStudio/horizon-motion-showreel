@@ -91,9 +91,14 @@ function Index() {
     placeBrand(brand, 0);
     // Jump to the top only once the logo has landed and the page is invisible
     window.setTimeout(() => {
+      // Clear the reel's lingering opacity transitions while it is hidden.
+      page.classList.add("is-resetting");
+      sequenceRef.current?.style.setProperty("--reveal", "0");
+      headerRef.current?.style.setProperty("--reveal", "0");
+      headerRef.current?.style.setProperty("--pin", "0");
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     }, 560);
-    window.setTimeout(() => page.classList.remove("is-returning"), 760);
+    window.setTimeout(() => page.classList.remove("is-returning", "is-resetting"), 760);
   };
 
   useEffect(() => {

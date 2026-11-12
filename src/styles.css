@@ -610,3 +610,11 @@
 }
 .studio-page.is-returning .brand-name { color: var(--studio-ink); }
 .studio-page.is-returning .brand-mark { filter: none; }
+
+/* Reset hidden reel layers before restoring the opening screen. */
+.studio-page.is-resetting .studio-reel,
+.studio-page.is-resetting .reel-shade,
+.studio-page.is-resetting .reel-caption,
+.studio-page.is-resetting .frame-count {
+  transition: none;
+}
