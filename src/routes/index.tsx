@@ -130,7 +130,6 @@ function Index() {
             <p>
               Horizoncraft Studio is dedicated to bringing new innovations infront of people before they miss it.
             </p>
-            <span className="caption-location">Motion · Image · Dimension</span>
           </div>
           <span className="frame-count" aria-hidden="true">
             HCS — 001
