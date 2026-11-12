@@ -1,23 +1,147 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
+import { introProgressFromScroll } from "@/lib/intro-scroll";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Horizoncraft Studio — 3D Motion Design" },
+      {
+        name: "description",
+        content:
+          "Horizoncraft Studio is an independent 3D motion design studio creating visual worlds in motion.",
+      },
+      { property: "og:title", content: "Horizoncraft Studio — 3D Motion Design" },
+      {
+        property: "og:description",
+        content:
+          "An independent 3D motion design studio creating visual worlds in motion.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const clamp = (value: number) => Math.max(0, Math.min(1, value));
+const smoothStep = (value: number) => value * value * (3 - 2 * value);
+
 function Index() {
+  const sequenceRef = useRef<HTMLElement>(null);
+  const brandRef = useRef<HTMLDivElement>(null);
+  const reelRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const sequence = sequenceRef.current;
+    const brand = brandRef.current;
+    const reel = reelRef.current;
+    if (!sequence || !brand || !reel) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frameId = 0;
+    let isPlaying = false;
+
+    const render = () => {
+      frameId = 0;
+      const sequenceTravel = Math.max(1, sequence.offsetHeight - window.innerHeight);
+      const scrollIntoSequence = -sequence.getBoundingClientRect().top;
+      const rawProgress = introProgressFromScroll(scrollIntoSequence, sequenceTravel);
+      const eased = reducedMotion.matches
+        ? rawProgress > 0.56
+          ? 1
+          : 0
+        : smoothStep(rawProgress);
+
+      const isCompact = window.matchMedia("(max-width: 640px)").matches;
+      const startWidth = Math.min(window.innerWidth * (isCompact ? 0.86 : 0.78), 760);
+      const endWidth = Math.min(isCompact ? 248 : 274, window.innerWidth - 36);
+      const mix = (from: number, to: number) => from + (to - from) * eased;
+
+      brand.style.width = `${mix(startWidth, endWidth)}px`;
+      brand.style.setProperty(
+        "--brand-size",
+        `${mix(isCompact ? 26 : 48, 19)}px`,
+      );
+      brand.style.left = `${mix(window.innerWidth / 2, isCompact ? 18 : 36)}px`;
+      brand.style.top = `${mix(window.innerHeight / 2, isCompact ? 18 : 28)}px`;
+      brand.style.transform = `translate(${mix(-50, 0)}%, ${mix(-50, 0)}%)`;
+      sequence.style.setProperty("--reveal", String(eased));
+
+      if (eased > 0.4 && !isPlaying) {
+        isPlaying = true;
+        void reel.play().catch(() => {
+          isPlaying = false;
+        });
+      } else if (eased <= 0.4 && isPlaying) {
+        reel.pause();
+        isPlaying = false;
+      }
+    };
+
+    const scheduleRender = () => {
+      if (frameId === 0) frameId = window.requestAnimationFrame(render);
+    };
+
+    render();
+    window.addEventListener("scroll", scheduleRender, { passive: true });
+    window.addEventListener("resize", scheduleRender);
+    reducedMotion.addEventListener("change", scheduleRender);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleRender);
+      window.removeEventListener("resize", scheduleRender);
+      reducedMotion.removeEventListener("change", scheduleRender);
+      if (frameId !== 0) window.cancelAnimationFrame(frameId);
+      reel.pause();
+    };
+  }, []);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="studio-page">
+      <section className="studio-sequence" ref={sequenceRef} aria-label="Horizoncraft Studio">
+        <div className="studio-stage">
+          <video
+            className="studio-reel"
+            ref={reelRef}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Horizoncraft Studio 3D motion design showreel"
+          >
+            <source src="/showreel.mp4" type="video/mp4" />
+          </video>
+          <div className="reel-shade" aria-hidden="true" />
+
+          <header className="studio-header">
+            <div className="brand-lockup" ref={brandRef}>
+              <img className="brand-mark" src={studioMark.url} alt="" />
+              <span className="brand-name">Horizoncraft Studio</span>
+            </div>
+            <span className="header-specialty">3D motion design</span>
+          </header>
+
+          <div className="reel-caption">
+            <span className="caption-index">Independent studio</span>
+            <p>
+              Horizoncraft Studio creates distinctive visual worlds through 3D motion
+              design.
+            </p>
+            <span className="caption-location">Motion · Image · Dimension</span>
+          </div>
+          <span className="frame-count" aria-hidden="true">
+            HCS — 001
+          </span>
+        </div>
+      </section>
+
+      <footer className="studio-footer">
+        <span>Horizoncraft Studio</span>
+        <span>Independent 3D motion design</span>
+      </footer>
+    </main>
   );
 }

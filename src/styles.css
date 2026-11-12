@@ -30,6 +30,8 @@
  */
 
 @theme inline {
+  --font-display: "Cal Sans", sans-serif;
+  --font-sans: "DM Sans", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -74,25 +76,29 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --studio-paper: oklch(0.995 0.003 90);
+  --studio-ink: oklch(0.17 0.008 275);
+  --studio-muted: oklch(0.55 0.01 275);
+  --studio-rule: oklch(0.88 0.006 275);
+  --background: var(--studio-paper);
+  --foreground: var(--studio-ink);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: var(--studio-ink);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: var(--studio-ink);
+  --primary: var(--studio-ink);
+  --primary-foreground: var(--studio-paper);
+  --secondary: oklch(0.96 0.004 275);
+  --secondary-foreground: var(--studio-ink);
+  --muted: oklch(0.96 0.004 275);
+  --muted-foreground: var(--studio-muted);
+  --accent: oklch(0.94 0.005 275);
+  --accent-foreground: var(--studio-ink);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: var(--studio-rule);
+  --input: var(--studio-rule);
+  --ring: var(--studio-muted);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -151,5 +157,238 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}
+
+@theme inline {
+  --color-studio-paper: var(--studio-paper);
+  --color-studio-ink: var(--studio-ink);
+  --color-studio-muted: var(--studio-muted);
+  --color-studio-rule: var(--studio-rule);
+}
+
+.studio-page {
+  background: var(--studio-paper);
+  color: var(--studio-ink);
+}
+
+.studio-sequence {
+  --reveal: 0;
+  height: 200svh;
+  position: relative;
+  background: var(--studio-paper);
+}
+
+.studio-stage {
+  background: color-mix(in oklab, var(--studio-paper), var(--studio-ink) var(--reveal));
+  height: 100svh;
+  min-height: 32rem;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  isolation: isolate;
+}
+
+.studio-reel {
+  background: var(--studio-ink);
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  opacity: var(--reveal);
+  position: absolute;
+  transition: opacity 720ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  width: 100%;
+  z-index: 0;
+}
+
+.reel-shade {
+  background: linear-gradient(
+    180deg,
+    oklch(0.1 0.01 275 / 24%),
+    transparent 30%,
+    transparent 48%,
+    oklch(0.1 0.01 275 / 68%)
+  );
+  inset: 0;
+  opacity: var(--reveal);
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 720ms ease;
+  z-index: 1;
+}
+
+.studio-header {
+  align-items: flex-start;
+  display: flex;
+  inset: 0 0 auto;
+  justify-content: flex-end;
+  padding: 28px 38px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.brand-lockup {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  position: absolute;
+  width: 760px;
+  will-change: width, left, top, transform;
+}
+
+.brand-mark {
+  display: block;
+  flex: 0 0 30%;
+  filter: invert(var(--reveal));
+  height: auto;
+  object-fit: contain;
+  width: 30%;
+}
+
+.brand-name {
+  color: color-mix(in oklab, var(--studio-ink), oklch(1 0 0) var(--reveal));
+  font-family: var(--font-display);
+  font-size: var(--brand-size, 48px);
+  line-height: 1.08;
+  white-space: nowrap;
+}
+
+.header-specialty {
+  color: oklch(1 0 0);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: var(--reveal);
+  padding-top: 4px;
+  text-transform: uppercase;
+  transition: opacity 420ms ease;
+}
+
+.reel-caption {
+  bottom: clamp(38px, 8vh, 96px);
+  color: oklch(1 0 0);
+  left: clamp(24px, 8vw, 112px);
+  max-width: 580px;
+  opacity: var(--reveal);
+  position: absolute;
+  transform: translateY(calc((1 - var(--reveal)) * 16px));
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+  z-index: 2;
+}
+
+.caption-index,
+.caption-location,
+.frame-count {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.caption-index {
+  margin-bottom: 16px;
+  opacity: 0.76;
+}
+
+.reel-caption p {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1.24;
+  margin: 0 0 20px;
+  max-width: 520px;
+}
+
+.caption-location {
+  opacity: 0.76;
+}
+
+.frame-count {
+  bottom: 42px;
+  color: oklch(1 0 0 / 76%);
+  opacity: var(--reveal);
+  position: absolute;
+  right: 38px;
+  transition: opacity 420ms ease;
+}
+
+.studio-footer {
+  align-items: center;
+  border-top: 1px solid var(--studio-rule);
+  color: var(--studio-muted);
+  display: flex;
+  font-size: 11px;
+  justify-content: space-between;
+  letter-spacing: 0.02em;
+  min-height: 72px;
+  padding: 0 38px;
+}
+
+@media (max-width: 640px) {
+  .studio-sequence {
+    height: 180svh;
+  }
+
+  .studio-header {
+    padding: 18px;
+  }
+
+  .brand-lockup {
+    gap: 8px;
+  }
+
+  .brand-mark {
+    flex-basis: 26%;
+    width: 26%;
+  }
+
+  .brand-name {
+    font-size: var(--brand-size, 19px);
+  }
+
+  .header-specialty {
+    font-size: 9px;
+    padding-top: 2px;
+  }
+
+  .reel-caption {
+    bottom: 50px;
+    left: 22px;
+    max-width: calc(100% - 44px);
+  }
+
+  .reel-caption p {
+    font-size: 25px;
+    max-width: 390px;
+  }
+
+  .caption-index,
+  .caption-location {
+    font-size: 9px;
+  }
+
+  .frame-count {
+    display: none;
+  }
+
+  .studio-footer {
+    font-size: 10px;
+    gap: 16px;
+    min-height: 60px;
+    padding: 0 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
