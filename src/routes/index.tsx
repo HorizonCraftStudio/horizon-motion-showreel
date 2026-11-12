@@ -66,6 +66,18 @@ function Index() {
   const reelRef = useRef<HTMLVideoElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const pageRef = useRef<HTMLElement>(null);
+
+  const returnToLogo = () => {
+    const page = pageRef.current;
+    if (!page || page.classList.contains("is-returning")) return;
+    if (window.scrollY < 4) return;
+    page.classList.add("is-returning");
+    window.setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    }, 500);
+    window.setTimeout(() => page.classList.remove("is-returning"), 1600);
+  };
 
   useEffect(() => {
     const node = nextRef.current;
@@ -162,9 +174,22 @@ function Index() {
   }, []);
 
   return (
-    <main className="studio-page">
+    <main className="studio-page" ref={pageRef}>
       <header className="studio-header" ref={headerRef}>
-        <div className="brand-lockup" ref={brandRef}>
+        <div
+          className="brand-lockup"
+          ref={brandRef}
+          role="button"
+          tabIndex={0}
+          aria-label="Back to the Horizoncraft Studio logo"
+          onClick={returnToLogo}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              returnToLogo();
+            }
+          }}
+        >
           <img className="brand-mark" src={studioMark.url} alt="" />
           <span className="brand-name">Horizoncraft Studio</span>
         </div>
