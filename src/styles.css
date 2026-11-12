@@ -359,13 +359,20 @@
   text-transform: uppercase;
 }
 
+.after-showreel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 100svh;
+  padding: 132px 0 24px;
+}
+
 .clients {
-  padding: 96px 0 72px;
   text-align: center;
 }
 
 .logo-marquee {
-  margin-top: 40px;
+  margin-top: 24px;
   mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
   overflow: hidden;
 }
@@ -402,34 +409,21 @@
   width: 22px;
 }
 
-.services-sequence {
-  height: 200svh;
-  position: relative;
-}
-
 .services {
-  display: flex;
-  flex-direction: column;
-  height: 100svh;
-  justify-content: center;
-  opacity: var(--services-in, 0);
-  padding: 84px 38px 0;
-  position: sticky;
-  top: 0;
-  transform: scale(calc(0.96 + var(--services-in, 0) * 0.04));
+  padding: 0 38px;
 }
 
 .contact {
   border-top: 1px solid var(--studio-rule);
   margin: 0 38px;
-  padding: 96px 0 120px;
+  padding-top: 32px;
 }
 
 .contact h2 {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(28px, 3.4vw, 44px);
   line-height: 1.05;
-  margin: 16px 0 40px;
+  margin: 12px 0 24px;
 }
 
 .contact-links {
@@ -442,21 +436,21 @@
   border-bottom: 1px solid var(--studio-ink);
   color: var(--studio-ink);
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.4vw, 30px);
+  font-size: clamp(18px, 2vw, 26px);
   padding-bottom: 4px;
   text-decoration: none;
 }
 
 .services h2 {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(28px, 3.4vw, 44px);
   line-height: 1.05;
-  margin: 16px 0 56px;
+  margin: 12px 0 32px;
 }
 
 .service-list {
   display: grid;
-  gap: 32px;
+  gap: 24px;
   grid-template-columns: repeat(3, 1fr);
   list-style: none;
   margin: 0;
@@ -465,7 +459,7 @@
 
 .service-list li {
   border-top: 1px solid var(--studio-ink);
-  padding-top: 20px;
+  padding-top: 16px;
 }
 
 .service-index {
@@ -475,9 +469,9 @@
 
 .service-list h3 {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 22px;
   line-height: 1.15;
-  margin: 12px 0;
+  margin: 10px 0;
 }
 
 .service-list p {
@@ -546,13 +540,18 @@
     display: none;
   }
 
+  .after-showreel {
+    gap: 56px;
+    justify-content: flex-start;
+    padding: 88px 0 40px;
+  }
+
   .services {
-    padding: 72px 18px 0;
+    padding: 0 18px;
   }
 
   .contact {
     margin: 0 18px;
-    padding: 72px 0 88px;
   }
 
   .service-list {

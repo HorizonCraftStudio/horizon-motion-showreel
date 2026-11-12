@@ -53,7 +53,6 @@ function Index() {
   const reelRef = useRef<HTMLVideoElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
-  const servicesRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const node = nextRef.current;
@@ -79,8 +78,7 @@ function Index() {
     const brand = brandRef.current;
     const reel = reelRef.current;
     const header = headerRef.current;
-    const servicesBlock = servicesRef.current;
-    if (!sequence || !brand || !reel || !header || !servicesBlock) return;
+    if (!sequence || !brand || !reel || !header) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frameId = 0;
@@ -120,13 +118,6 @@ function Index() {
       const pin = clamp((110 - sequenceBottom) / 110);
       header.style.setProperty("--pin", String(pin));
       header.style.setProperty("--reveal", String(eased * (1 - pin)));
-
-      // Services fade in as a full screen panel
-      const servicesTop = servicesBlock.getBoundingClientRect().top;
-      const servicesIn = reducedMotion.matches
-        ? 1
-        : smoothStep(clamp((window.innerHeight - servicesTop) / window.innerHeight));
-      servicesBlock.style.setProperty("--services-in", String(servicesIn));
 
       if (eased > 0.4 && !isPlaying) {
         isPlaying = true;
@@ -195,26 +186,22 @@ function Index() {
       </section>
 
       <div ref={nextRef}>
-        <section className="clients fade-in" aria-label="Our clients">
-          <span className="section-label">Trusted by</span>
-          <div className="logo-marquee">
-            <div className="logo-track">
-              {[...clientLogos, ...clientLogos].map((name, i) => (
-                <span className="client-logo" key={i} aria-hidden={i >= clientLogos.length}>
-                  <span className="client-glyph" />
-                  {name}
-                </span>
-              ))}
+        <section className="after-showreel fade-in" aria-label="Clients, services and contact">
+          <div className="clients">
+            <span className="section-label">Trusted by</span>
+            <div className="logo-marquee">
+              <div className="logo-track">
+                {[...clientLogos, ...clientLogos].map((name, i) => (
+                  <span className="client-logo" key={i} aria-hidden={i >= clientLogos.length}>
+                    <span className="client-glyph" />
+                    {name}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </section>
 
-        <section
-          className="services-sequence"
-          ref={servicesRef}
-          aria-labelledby="services-title"
-        >
-          <div className="services">
+          <div className="services" aria-labelledby="services-title">
             <span className="section-label">Services</span>
             <h2 id="services-title">What we make</h2>
             <ol className="service-list">
@@ -227,14 +214,14 @@ function Index() {
               ))}
             </ol>
           </div>
-        </section>
 
-        <section className="contact fade-in" aria-labelledby="contact-title">
-          <span className="section-label">Contact</span>
-          <h2 id="contact-title">Let's make something move.</h2>
-          <div className="contact-links">
-            <a href="mailto:admin@horizoncraft.studio">admin@horizoncraft.studio</a>
-            <a href="tel:+917406387579">+91 7406387579</a>
+          <div className="contact" aria-labelledby="contact-title">
+            <span className="section-label">Contact</span>
+            <h2 id="contact-title">Let's make something move.</h2>
+            <div className="contact-links">
+              <a href="mailto:admin@horizoncraft.studio">admin@horizoncraft.studio</a>
+              <a href="tel:+917406387579">+91 7406387579</a>
+            </div>
           </div>
         </section>
       </div>
