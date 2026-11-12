@@ -237,7 +237,7 @@ function Index() {
 
           <div className="contact" aria-labelledby="contact-title">
             <span className="section-label">Contact</span>
-            <h2 id="contact-title">Let's make something move.</h2>
+            <h2 id="contact-title">Let's make something great.</h2>
             <div className="contact-links">
               <a href="mailto:admin@horizoncraft.studio">admin@horizoncraft.studio</a>
               <a href="tel:+917406387579">+91 7406387579</a>
