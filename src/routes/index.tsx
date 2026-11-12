@@ -27,6 +27,23 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const clientLogos = ["Northwind", "Lumen", "Axiom Labs", "Vertex", "Orbitra"];
+
+const services = [
+  {
+    title: "Product launch film",
+    text: "Cinematic 3D films that introduce your product to the world.",
+  },
+  {
+    title: "Complete product PDP",
+    text: "Every render, loop and detail view your product page needs.",
+  },
+  {
+    title: "Website hero section animation",
+    text: "Scroll-ready 3D motion that makes your homepage unforgettable.",
+  },
+];
+
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const smoothStep = (value: number) => value * value * (3 - 2 * value);
 
@@ -34,6 +51,26 @@ function Index() {
   const sequenceRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
   const reelRef = useRef<HTMLVideoElement>(null);
+  const nextRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = nextRef.current;
+    if (!node) return;
+    const items = node.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 },
+    );
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const sequence = sequenceRef.current;
@@ -49,7 +86,10 @@ function Index() {
       frameId = 0;
       const sequenceTravel = Math.max(1, sequence.offsetHeight - window.innerHeight);
       const scrollIntoSequence = -sequence.getBoundingClientRect().top;
-      const rawProgress = introProgressFromScroll(scrollIntoSequence, sequenceTravel);
+      const rawProgress = introProgressFromScroll(
+        scrollIntoSequence,
+        sequenceTravel * 0.5,
+      ); // second half of travel holds the open reel
       const eased = reducedMotion.matches
         ? rawProgress > 0.56
           ? 1
@@ -136,6 +176,36 @@ function Index() {
           </span>
         </div>
       </section>
+
+      <div ref={nextRef}>
+        <section className="clients fade-in" aria-label="Our clients">
+          <span className="section-label">Trusted by</span>
+          <div className="logo-marquee">
+            <div className="logo-track">
+              {[...clientLogos, ...clientLogos].map((name, i) => (
+                <span className="client-logo" key={i} aria-hidden={i >= clientLogos.length}>
+                  <span className="client-glyph" />
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="services fade-in" aria-labelledby="services-title">
+          <span className="section-label">Services</span>
+          <h2 id="services-title">What we make</h2>
+          <ol className="service-list">
+            {services.map((service, i) => (
+              <li key={service.title}>
+                <span className="service-index">0{i + 1}</span>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
 
       <footer className="studio-footer">
         <span>Horizoncraft Studio</span>
