@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
 import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
+import studioReel from "@/assets/horizoncraft-showreel.mp4.asset.json";
 import { introProgressFromScroll } from "@/lib/intro-scroll";
 
 export const Route = createFileRoute("/")({
@@ -112,7 +113,7 @@ function Index() {
             preload="metadata"
             aria-label="Horizoncraft Studio 3D motion design showreel"
           >
-            <source src="/showreel.mp4" type="video/mp4" />
+            <source src={studioReel.url} type="video/mp4" />
           </video>
           <div className="reel-shade" aria-hidden="true" />
 
