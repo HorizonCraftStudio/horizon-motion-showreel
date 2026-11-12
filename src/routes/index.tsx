@@ -60,6 +60,19 @@ const services = [
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const smoothStep = (value: number) => value * value * (3 - 2 * value);
 
+const placeBrand = (brand: HTMLDivElement, eased: number) => {
+  const isCompact = window.matchMedia("(max-width: 640px)").matches;
+  const startWidth = Math.min(window.innerWidth * (isCompact ? 0.86 : 0.78), 760);
+  const endWidth = Math.min(isCompact ? 248 : 274, window.innerWidth - 36);
+  const mix = (from: number, to: number) => from + (to - from) * eased;
+
+  brand.style.width = `${mix(startWidth, endWidth)}px`;
+  brand.style.setProperty("--brand-size", `${mix(isCompact ? 26 : 48, 19)}px`);
+  brand.style.left = `${mix(window.innerWidth / 2, isCompact ? 18 : 36)}px`;
+  brand.style.top = `${mix(window.innerHeight / 2, isCompact ? 18 : 28)}px`;
+  brand.style.transform = `translate(${mix(-50, 0)}%, ${mix(-50, 0)}%)`;
+};
+
 function Index() {
   const sequenceRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
@@ -70,13 +83,17 @@ function Index() {
 
   const returnToLogo = () => {
     const page = pageRef.current;
-    if (!page || page.classList.contains("is-returning")) return;
+    const brand = brandRef.current;
+    if (!page || !brand || page.classList.contains("is-returning")) return;
     if (window.scrollY < 4) return;
+    // Logo starts growing immediately, in parallel with the page fading out
     page.classList.add("is-returning");
+    placeBrand(brand, 0);
+    // Jump to the top only once the logo has landed and the page is invisible
     window.setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-    }, 250);
-    window.setTimeout(() => page.classList.remove("is-returning"), 850);
+    }, 560);
+    window.setTimeout(() => page.classList.remove("is-returning"), 760);
   };
 
   useEffect(() => {
@@ -123,19 +140,9 @@ function Index() {
           : 0
         : smoothStep(rawProgress);
 
-      const isCompact = window.matchMedia("(max-width: 640px)").matches;
-      const startWidth = Math.min(window.innerWidth * (isCompact ? 0.86 : 0.78), 760);
-      const endWidth = Math.min(isCompact ? 248 : 274, window.innerWidth - 36);
-      const mix = (from: number, to: number) => from + (to - from) * eased;
-
-      brand.style.width = `${mix(startWidth, endWidth)}px`;
-      brand.style.setProperty(
-        "--brand-size",
-        `${mix(isCompact ? 26 : 48, 19)}px`,
-      );
-      brand.style.left = `${mix(window.innerWidth / 2, isCompact ? 18 : 36)}px`;
-      brand.style.top = `${mix(window.innerHeight / 2, isCompact ? 18 : 28)}px`;
-      brand.style.transform = `translate(${mix(-50, 0)}%, ${mix(-50, 0)}%)`;
+      if (!pageRef.current?.classList.contains("is-returning")) {
+        placeBrand(brand, eased);
+      }
       sequence.style.setProperty("--reveal", String(eased));
 
       // Pin header over the white sections once the showreel scrolls away
