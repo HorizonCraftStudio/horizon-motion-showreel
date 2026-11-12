@@ -128,8 +128,7 @@ function Index() {
           <div className="reel-caption">
             <span className="caption-index">Independent studio</span>
             <p>
-              Horizoncraft Studio creates distinctive visual worlds through 3D motion
-              design.
+              Horizoncraft Studio is dedicated to bringing new innovations infront of people before they miss it.
             </p>
             <span className="caption-location">Motion · Image · Dimension</span>
           </div>
