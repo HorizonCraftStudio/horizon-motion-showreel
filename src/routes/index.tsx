@@ -233,8 +233,8 @@ function Index() {
           <span className="section-label">Contact</span>
           <h2 id="contact-title">Let's make something move.</h2>
           <div className="contact-links">
-            <a href="mailto:hello@horizoncraft.studio">hello@horizoncraft.studio</a>
-            <a href="tel:+910000000000">+91 00000 00000</a>
+            <a href="mailto:admin@horizoncraft.studio">admin@horizoncraft.studio</a>
+            <a href="tel:+917406387579">+91 7406387579</a>
           </div>
         </section>
       </div>
