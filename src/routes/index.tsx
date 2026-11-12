@@ -75,8 +75,8 @@ function Index() {
     page.classList.add("is-returning");
     window.setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-    }, 500);
-    window.setTimeout(() => page.classList.remove("is-returning"), 1600);
+    }, 250);
+    window.setTimeout(() => page.classList.remove("is-returning"), 850);
   };
 
   useEffect(() => {
