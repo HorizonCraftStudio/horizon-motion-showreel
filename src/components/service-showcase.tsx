@@ -2,6 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowLeft } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { LaunchFilmPlayer } from "@/components/launch-film-player";
 import { studioMark } from "@/lib/media";
 import { pdpCaldigitDock } from "@/lib/media";
 import { pdpEarbudsDark } from "@/lib/media";
@@ -87,21 +88,15 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
               {selection.service.showcase === "film" ? (
                 <div className="showcase-films">
                   <figure data-ready={Boolean(readyMedia["film1"])}>
-                    <div className="film-frame">
-                      <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/qYks1zCuC28" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                    </div>
+                    <LaunchFilmPlayer videoId="qYks1zCuC28" title="KQi Air X" onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} />
                     <figcaption>KQi Air X <span className="film-tag">3D launch film</span></figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film2"])}>
-                    <div className="film-frame">
-                      <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/G9aDGM9YRxU" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                    </div>
+                    <LaunchFilmPlayer videoId="G9aDGM9YRxU" title="Kreo Arma" onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} />
                     <figcaption>Kreo Arma <span className="film-tag">3D launch film</span></figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film3"])}>
-                    <div className="film-frame">
-                      <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film3: true }))} src="https://www.youtube-nocookie.com/embed/Q8hsB0BFU1E" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                    </div>
+                    <LaunchFilmPlayer videoId="Q8hsB0BFU1E" title="Brave Parallax" onLoad={() => setReadyMedia((ready) => ({ ...ready, film3: true }))} />
                     <figcaption>Brave Parallax <span className="film-tag">3D launch film</span></figcaption>
                   </figure>
                 </div>

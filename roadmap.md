@@ -2,3 +2,4 @@
 - [x] Add temporary YouTube films and Product PDP images; leave the third service unchanged.
 - [x] Verify opening, closing, logo return, and mobile layout.
 - [x] Remove the showreel playback wait and verify full-screen mobile coverage.
+- [x] Simplify all launch-film players and verify playback and audio controls.
