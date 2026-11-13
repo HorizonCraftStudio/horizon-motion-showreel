@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowLeft } from "lucide-react";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LaunchFilmPlayer } from "@/components/launch-film-player";
 import { studioMark } from "@/lib/media";
@@ -39,6 +39,18 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
   const [logoReturning, setLogoReturning] = useState(false);
   const [readyMedia, setReadyMedia] = useState<Record<string, boolean>>({});
   const animationRef = useRef<Animation | null>(null);
+  const logoReturningRef = useRef(false);
+
+  // Push a history entry so the browser back button closes the showcase.
+  useEffect(() => {
+    window.history.pushState({ serviceShowcase: true }, "");
+    const handlePopState = () => {
+      if (logoReturningRef.current) return;
+      setClosing(true);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   useLayoutEffect(() => {
     if (!title) return;
@@ -60,7 +72,13 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
     return () => { animation.onfinish = null; animation.cancel(); };
   }, [title, selection, closing, onClose]);
 
-  const close = () => setClosing(true);
+  const close = () => {
+    if (closing) return;
+    // Consume the pushed history entry; the popstate handler starts the close.
+    window.history.back();
+    // Fallback in case the entry was already consumed and no popstate fires.
+    window.setTimeout(() => setClosing(true), 120);
+  };
 
   return (
     <Dialog.Root open onOpenChange={(open) => { if (!open) close(); }}>
@@ -72,7 +90,10 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
           <div className="showcase-header">
             <Button variant="ghost" className="showcase-brand" onClick={(event) => {
               if (logoReturning) return;
+              logoReturningRef.current = true;
               setLogoReturning(true);
+              // Consume the pushed history entry without triggering the close animation.
+              window.history.back();
               onLogo(event.currentTarget.getBoundingClientRect());
             }} aria-label="Back to the Horizoncraft Studio logo">
               <img src={studioMark.url} alt="" />
