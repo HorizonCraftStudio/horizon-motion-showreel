@@ -154,9 +154,9 @@ function Index() {
       header.style.setProperty("--pin", String(pin));
       header.style.setProperty("--reveal", String(eased * (1 - pin)));
 
-      // Mount the YouTube embed only once the reel starts revealing;
-      // its autoplay then begins playback on its own.
-      if (eased > 0.4 && !reelActivated) {
+      // Warm up playback behind the opening logo so the settling period
+      // overlaps the intro instead of starting when the user reveals the reel.
+      if (!reelActivated) {
         reelActivated = true;
         setReelOn(true);
       }

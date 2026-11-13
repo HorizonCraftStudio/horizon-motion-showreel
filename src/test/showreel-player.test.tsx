@@ -36,7 +36,7 @@ describe("showreel playback readiness", () => {
     expect(iframe.classList.contains("is-ready")).toBe(false);
     act(() => { state({ data: 3 }); vi.advanceTimersByTime(5000); });
     expect(iframe.classList.contains("is-ready")).toBe(false);
-    act(() => { state({ data: 1 }); vi.advanceTimersByTime(1500); });
+    act(() => { state({ data: 1 }); vi.advanceTimersByTime(4000); });
     expect(iframe.classList.contains("is-ready")).toBe(true);
     act(() => { state({ data: 2 }); });
     expect(iframe.classList.contains("is-ready")).toBe(false);

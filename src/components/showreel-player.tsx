@@ -74,7 +74,7 @@ export function ShowreelPlayer() {
             if (data === 1) {
               revealTimer = setTimeout(() => {
                 if (!disposed) setReady(true);
-              }, 1500);
+              }, 4000);
             }
           },
         },
