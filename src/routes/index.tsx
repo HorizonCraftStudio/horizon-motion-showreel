@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://www.horizoncraft.studio/" },
       {
         property: "og:image",
-        content: "https://www.horizoncraft.studio/media/pdp-brave-parallax.webp",
+        content: "https://www.horizoncraft.studio/media/pdp-earbuds-pixel.webp",
       },
       {
         property: "og:image:alt",
@@ -58,7 +58,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:image",
-        content: "https://www.horizoncraft.studio/media/pdp-brave-parallax.webp",
+        content: "https://www.horizoncraft.studio/media/pdp-earbuds-pixel.webp",
       },
     ],
     links: [
