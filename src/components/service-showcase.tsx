@@ -83,8 +83,8 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
               {selection.service.showcase === "film" ? (
                 <div className="showcase-films">
                   <figure data-ready={Boolean(readyMedia["film1"])}>
-                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ" title="Temporary film sample — Big Buck Bunny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
-                    <figcaption>Big Buck Bunny <span>Temporary film sample</span></figcaption>
+                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/qYks1zCuC28" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                    <figcaption>Launch film <span>YouTube embed</span></figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film2"])}>
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/R6MlUcmOul8" title="Temporary film sample — Tears of Steel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
