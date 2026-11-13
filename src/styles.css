@@ -711,7 +711,7 @@
   border: 0;
   background: var(--studio-ink);
 }
-.showcase-images img { width: 100%; height: auto; display: block; aspect-ratio: 1440 / 1024; object-fit: cover; }
+.showcase-images img { width: 100%; height: auto; display: block; }
 .showcase-media figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13px; margin-top: 14px; }
 .showcase-media figcaption span { color: var(--studio-muted); font-size: 11px; }
 @keyframes showcase-fade { from { opacity: 0; } to { opacity: 1; } }

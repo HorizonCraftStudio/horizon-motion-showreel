@@ -3,9 +3,24 @@ import { ArrowLeft } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
-import productImage from "@/assets/pdp-headphones.jpg";
-import detailImage from "@/assets/pdp-headphones-detail.jpg";
+import pdpCaldigitDock from "@/assets/pdp-caldigit-dock.webp.asset.json";
+import pdpEarbudsDark from "@/assets/pdp-earbuds-dark.webp.asset.json";
+import pdpEarbudsPixel from "@/assets/pdp-earbuds-pixel.webp.asset.json";
+import pdpHyphenSerum from "@/assets/pdp-hyphen-serum.webp.asset.json";
+import pdpTabletStylus from "@/assets/pdp-tablet-stylus.webp.asset.json";
+import pdpWatchBlue from "@/assets/pdp-watch-blue.png.asset.json";
+import pdpWatchOrange from "@/assets/pdp-watch-orange.png.asset.json";
 import type { ShowcaseService } from "@/lib/services";
+
+const pdpImages = [
+  { asset: pdpCaldigitDock, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
+  { asset: pdpEarbudsPixel, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Wireless earbuds" },
+  { asset: pdpEarbudsDark, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Wireless earbuds" },
+  { asset: pdpHyphenSerum, alt: "Hyphen Power Peptides Cocktail Serum bottle standing among glass test tubes with blue liquid", caption: "Hyphen serum" },
+  { asset: pdpWatchOrange, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Smartwatch" },
+  { asset: pdpTabletStylus, alt: "Tablet with stylus showing a digital painting app with a poppy artwork", caption: "Tablet and stylus" },
+  { asset: pdpWatchBlue, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Smartwatch" },
+];
 
 export type ServiceSelection = { service: ShowcaseService; origin: DOMRect; trigger: HTMLButtonElement };
 
@@ -17,7 +32,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
   const [title, setTitle] = useState<HTMLHeadingElement | null>(null);
   const [closing, setClosing] = useState(false);
   const [logoReturning, setLogoReturning] = useState(false);
-  const [readyMedia, setReadyMedia] = useState<Partial<Record<"film1" | "film2" | "image1" | "image2", boolean>>>({});
+  const [readyMedia, setReadyMedia] = useState<Record<string, boolean>>({});
   const animationRef = useRef<Animation | null>(null);
 
   useLayoutEffect(() => {
@@ -67,25 +82,23 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
             <div className="showcase-media">
               {selection.service.showcase === "film" ? (
                 <div className="showcase-films">
-                  <figure data-ready={Boolean(readyMedia.film1)}>
+                  <figure data-ready={Boolean(readyMedia["film1"])}>
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ" title="Temporary film sample — Big Buck Bunny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                     <figcaption>Big Buck Bunny <span>Temporary film sample</span></figcaption>
                   </figure>
-                  <figure data-ready={Boolean(readyMedia.film2)}>
+                  <figure data-ready={Boolean(readyMedia["film2"])}>
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/R6MlUcmOul8" title="Temporary film sample — Tears of Steel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                     <figcaption>Tears of Steel <span>Temporary film sample</span></figcaption>
                   </figure>
                 </div>
               ) : (
                 <div className="showcase-images">
-                  <figure data-ready={Boolean(readyMedia.image1)}>
-                    <img onLoad={() => setReadyMedia((ready) => ({ ...ready, image1: true }))} src={productImage} alt="Silver headphones with green fabric cushions, complete product view" width={1440} height={1024} loading="lazy" />
-                    <figcaption>Product view <span>Temporary image sample</span></figcaption>
-                  </figure>
-                  <figure data-ready={Boolean(readyMedia.image2)}>
-                    <img onLoad={() => setReadyMedia((ready) => ({ ...ready, image2: true }))} src={detailImage} alt="Close-up of brushed aluminum earcup and green fabric cushion" width={1440} height={1024} loading="lazy" />
-                    <figcaption>Material detail <span>Temporary image sample</span></figcaption>
-                  </figure>
+                  {pdpImages.map((image, i) => (
+                    <figure key={image.asset.url} data-ready={Boolean(readyMedia[`image${i}`])}>
+                      <img onLoad={() => setReadyMedia((ready) => ({ ...ready, [`image${i}`]: true }))} src={image.asset.url} alt={image.alt} loading="lazy" />
+                      <figcaption>{image.caption} <span>Product render</span></figcaption>
+                    </figure>
+                  ))}
                 </div>
               )}
             </div>
