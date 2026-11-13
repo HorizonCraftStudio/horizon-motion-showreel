@@ -2,15 +2,15 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowLeft } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
-import pdpCaldigitDock from "@/assets/pdp-caldigit-dock.webp.asset.json";
-import pdpEarbudsDark from "@/assets/pdp-earbuds-dark.webp.asset.json";
-import pdpEarbudsPixel from "@/assets/pdp-earbuds-pixel.webp.asset.json";
-import pdpHyphenSerum from "@/assets/pdp-hyphen-serum.png.asset.json";
-import pdpMieleWineCooler from "@/assets/pdp-miele-wine-cooler.png.asset.json";
-import pdpBraveParallax from "@/assets/pdp-brave-parallax.png.asset.json";
-import pdpWatchBlue from "@/assets/pdp-watch-blue.png.asset.json";
-import pdpWatchOrange from "@/assets/pdp-watch-orange.png.asset.json";
+import { studioMark } from "@/lib/media";
+import { pdpCaldigitDock } from "@/lib/media";
+import { pdpEarbudsDark } from "@/lib/media";
+import { pdpEarbudsPixel } from "@/lib/media";
+import { pdpHyphenSerum } from "@/lib/media";
+import { pdpMieleWineCooler } from "@/lib/media";
+import { pdpBraveParallax } from "@/lib/media";
+import { pdpWatchBlue } from "@/lib/media";
+import { pdpWatchOrange } from "@/lib/media";
 import type { ShowcaseService } from "@/lib/services";
 
 const pdpImages = [

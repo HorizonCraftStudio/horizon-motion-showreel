@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { ServiceShowcase, type ServiceSelection } from "@/components/service-showcase";
 import { services } from "@/lib/services";
 
-import apolnusLogo from "@/assets/apolnus-logo.png.asset.json";
-import braveLogo from "@/assets/brave-logo.png.asset.json";
-import keiretsuLogo from "@/assets/keiretsu-forum-logo.png.asset.json";
-import kreoLogo from "@/assets/kreo-logo.png.asset.json";
-import mortCoLogo from "@/assets/mort-co-logo.png.asset.json";
-import qalzyLogo from "@/assets/qalzy-logo.png.asset.json";
-import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
-import studioReel from "@/assets/horizoncraft-showreel.mp4.asset.json";
+import { apolnusLogo } from "@/lib/media";
+import { braveLogo } from "@/lib/media";
+import { keiretsuLogo } from "@/lib/media";
+import { kreoLogo } from "@/lib/media";
+import { mortCoLogo } from "@/lib/media";
+import { qalzyLogo } from "@/lib/media";
+import { studioMark } from "@/lib/media";
+import { studioReel } from "@/lib/media";
 import { introProgressFromScroll } from "@/lib/intro-scroll";
 
 export const Route = createFileRoute("/")({
