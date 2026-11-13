@@ -16,8 +16,9 @@ it("controls playback and audio through YouTube and disposes the player", async 
   } } });
   const view = render(<LaunchFilmPlayer videoId="qYks1zCuC28" title="KQi Air X" onLoad={() => {}} />);
   await act(async () => {});
-  fireEvent.click(view.getByRole("button", { name: "Play" }));
   expect(player.playVideo).toHaveBeenCalledOnce();
+  fireEvent.click(view.getByRole("button", { name: "Play" }));
+  expect(player.playVideo).toHaveBeenCalledTimes(2);
   act(() => state?.({ data: 1 }));
   fireEvent.click(view.getByRole("button", { name: "Pause" }));
   expect(player.pauseVideo).toHaveBeenCalledOnce();

@@ -27,6 +27,7 @@ export function LaunchFilmPlayer({ videoId, title, onLoad }: {
           playerRef.current = target;
           target.mute();
           target.unloadModule("captions");
+          target.playVideo();
           setReady(true);
         },
         onStateChange: ({ data }) => {
@@ -41,7 +42,7 @@ export function LaunchFilmPlayer({ videoId, title, onLoad }: {
   return (
     <div className="film-frame">
       <iframe ref={iframeRef} onLoad={onLoad}
-        src={`https://www.youtube-nocookie.com/embed/${videoId}?enablejsapi=1&controls=0&playsinline=1&disablekb=1&fs=0&rel=0&iv_load_policy=3&cc_load_policy=0`}
+        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&enablejsapi=1&controls=0&playsinline=1&disablekb=1&fs=0&rel=0&iv_load_policy=3&cc_load_policy=0`}
         title={`${title} launch film`} allow="autoplay; encrypted-media" tabIndex={-1}
         referrerPolicy="strict-origin-when-cross-origin" />
       <div className="film-controls" role="group" aria-label={`${title} playback controls`}>
