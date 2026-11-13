@@ -12,7 +12,7 @@ import { kreoLogo } from "@/lib/media";
 import { mortCoLogo } from "@/lib/media";
 import { qalzyLogo } from "@/lib/media";
 import { studioMark } from "@/lib/media";
-import { introProgressFromScroll } from "@/lib/intro-scroll";
+import { introProgressFromScroll, introScrollDistance } from "@/lib/intro-scroll";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -131,6 +131,12 @@ function Index() {
 
     const render = () => {
       frameId = 0;
+      // Increase mobile scroll travel by 25%, yielding 20% less progress per swipe.
+      if (window.matchMedia("(max-width: 640px)").matches) {
+        sequence.style.height = `${100 + introScrollDistance(80, true)}svh`;
+      } else {
+        sequence.style.removeProperty("height");
+      }
       const sequenceTravel = Math.max(1, sequence.offsetHeight - window.innerHeight);
       const scrollIntoSequence = -sequence.getBoundingClientRect().top;
       const rawProgress = introProgressFromScroll(

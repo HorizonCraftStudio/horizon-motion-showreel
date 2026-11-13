@@ -1,8 +1,17 @@
 import { describe, expect, it } from "vitest";
 
-import { introProgressFromScroll } from "@/lib/intro-scroll";
+import { introProgressFromScroll, introScrollDistance } from "@/lib/intro-scroll";
 
 describe("studio intro scroll progress", () => {
+  it("reduces mobile scroll sensitivity by exactly 20%", () => {
+    expect(introScrollDistance(800, true)).toBe(1000);
+    expect(introProgressFromScroll(200, introScrollDistance(800, true))).toBe(0.2);
+  });
+
+  it("leaves desktop scroll sensitivity unchanged", () => {
+    expect(introScrollDistance(800, false)).toBe(800);
+  });
+
   it("starts with the logo intro fully visible at the top of the page", () => {
     expect(introProgressFromScroll(0, 900)).toBe(0);
   });
