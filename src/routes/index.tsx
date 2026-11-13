@@ -40,11 +40,11 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://www.horizoncraft.studio/" },
       {
         property: "og:image",
-        content: "https://www.horizoncraft.studio/media/pdp-earbuds-pixel.webp",
+        content: "https://www.horizoncraft.studio/media/og-horizoncraft-logo.webp",
       },
       {
         property: "og:image:alt",
-        content: "3D product visual created by HorizonCraft Studio",
+        content: "Horizoncraft Studio HC logo mark on black",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
@@ -58,7 +58,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:image",
-        content: "https://www.horizoncraft.studio/media/pdp-earbuds-pixel.webp",
+        content: "https://www.horizoncraft.studio/media/og-horizoncraft-logo.webp",
       },
     ],
     links: [
