@@ -31,3 +31,4 @@ use the editor.
 
 - Keep the studio’s animated logo-to-showreel introduction within the home page so its scroll transition remains continuous.
 - Keep service showcases in a full-screen modal on the home page, with service eligibility in the shared service list, so closing preserves the continuous intro and scroll position.
+- Use the YouTube IFrame API in the showreel player to reveal it only after sustained playback; iframe load does not establish that startup controls have cleared.

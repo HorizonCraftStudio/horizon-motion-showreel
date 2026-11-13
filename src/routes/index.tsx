@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ServiceShowcase, type ServiceSelection } from "@/components/service-showcase";
+import { ShowreelPlayer } from "@/components/showreel-player";
 import { services } from "@/lib/services";
 
 import { apolnusLogo } from "@/lib/media";
@@ -11,7 +12,6 @@ import { kreoLogo } from "@/lib/media";
 import { mortCoLogo } from "@/lib/media";
 import { qalzyLogo } from "@/lib/media";
 import { studioMark } from "@/lib/media";
-import { studioReel } from "@/lib/media";
 import { introProgressFromScroll } from "@/lib/intro-scroll";
 
 export const Route = createFileRoute("/")({
@@ -66,7 +66,6 @@ function Index() {
   const sequenceRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
   const [reelOn, setReelOn] = useState(false);
-  const [reelReady, setReelReady] = useState(false);
   const nextRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
@@ -204,19 +203,7 @@ function Index() {
       <section className="studio-sequence" ref={sequenceRef} aria-label="Horizoncraft Studio">
         <div className="studio-stage">
           <div className="studio-reel" role="img" aria-label="Horizoncraft Studio 3D motion design showreel">
-            {reelOn && (
-              <iframe
-                className={reelReady ? "is-ready" : undefined}
-                src={studioReel.url}
-                title="Horizoncraft Studio showreel"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                tabIndex={-1}
-                onLoad={() => {
-                  // Reveal only after YouTube's brief start-up chrome has faded.
-                  window.setTimeout(() => setReelReady(true), 2200);
-                }}
-              />
-            )}
+            {reelOn && <ShowreelPlayer />}
           </div>
           <div className="reel-shade" aria-hidden="true" />
 
