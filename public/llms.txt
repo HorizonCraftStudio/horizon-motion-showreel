@@ -1,0 +1,24 @@
+# HorizonCraft Studio
+
+> HorizonCraft Studio is an independent 3D motion design studio creating cinematic 3D product animations, product launch films, photorealistic product-page visuals and website hero animations for brands.
+
+## Website
+
+- [Homepage](https://www.horizoncraft.studio/): The studio's main public page, including its showreel, displayed client references, services and contact details.
+
+## Services
+
+- **Product launch films:** Cinematic 3D product animation and launch films that introduce new products through visual storytelling.
+- **Product detail page (PDP) visuals:** Photorealistic 3D product renders, animated loops and close-up detail views for product detail pages.
+- **Website hero animations:** Scroll-ready 3D animation for product features and brand stories on website homepages.
+
+## Displayed client references
+
+The homepage currently displays logos for Apolnus, Brave, Kreo, Keiretsu Forum, Mort & Co and Qalzy.
+
+## Contact
+
+- Email: admin@horizoncraft.studio
+- Phone: +91 7406387579
+
+For project enquiries, use the contact details above.

@@ -17,20 +17,52 @@ import { introProgressFromScroll, introScrollDistance } from "@/lib/intro-scroll
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Horizoncraft Studio — 3D Motion Design" },
+      {
+        title: "3D Product Animation Studio & CGI Films | HorizonCraft Studio",
+      },
       {
         name: "description",
         content:
-          "Horizoncraft Studio is an independent 3D motion design studio creating visual worlds in motion.",
+          "HorizonCraft Studio creates cinematic 3D product animations, product launch films, photorealistic product-page visuals and website hero animations for brands.",
       },
-      { property: "og:title", content: "Horizoncraft Studio — 3D Motion Design" },
+      { name: "robots", content: "index, follow" },
+      {
+        property: "og:title",
+        content: "3D Product Animation Studio & CGI Films | HorizonCraft Studio",
+      },
       {
         property: "og:description",
         content:
-          "An independent 3D motion design studio creating visual worlds in motion.",
+          "Cinematic 3D product animation, launch films and photorealistic product visuals for brands.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "HorizonCraft Studio" },
+      { property: "og:url", content: "https://www.horizoncraft.studio/" },
+      {
+        property: "og:image",
+        content: "https://www.horizoncraft.studio/media/pdp-brave-parallax.webp",
+      },
+      {
+        property: "og:image:alt",
+        content: "3D product visual created by HorizonCraft Studio",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "3D Product Animation Studio & CGI Films | HorizonCraft Studio",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Cinematic 3D product animation, launch films and photorealistic product visuals for brands.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://www.horizoncraft.studio/media/pdp-brave-parallax.webp",
+      },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.horizoncraft.studio/" },
     ],
   }),
   component: Index,
@@ -215,9 +247,9 @@ function Index() {
 
           <div className="reel-caption">
             <span className="caption-index">Independent studio</span>
-            <p>
-              Horizoncraft Studio is dedicated to bringing new innovations infront of people through high quality 3D production and creative direction.
-            </p>
+            <h1>
+              Cinematic 3D product animation, CGI films and photorealistic product visuals for brands.
+            </h1>
           </div>
           <span className="frame-count" aria-hidden="true">
             HCS — 001

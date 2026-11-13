@@ -73,6 +73,51 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   );
 }
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.horizoncraft.studio/#organization",
+      name: "HorizonCraft Studio",
+      url: "https://www.horizoncraft.studio/",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.horizoncraft.studio/media/horizoncraft-mark.webp",
+      },
+      description:
+        "An independent 3D motion design studio creating cinematic 3D product animations, product launch films, photorealistic product-page visuals and website hero animations for brands.",
+      email: "admin@horizoncraft.studio",
+      telephone: "+91 7406387579",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "business enquiries",
+        email: "admin@horizoncraft.studio",
+        telephone: "+91 7406387579",
+        availableLanguage: ["English"],
+      },
+      knowsAbout: [
+        "3D product animation",
+        "CGI product films",
+        "3D product rendering",
+        "product launch films",
+        "product detail page visuals",
+        "website hero animations",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.horizoncraft.studio/#website",
+      url: "https://www.horizoncraft.studio/",
+      name: "HorizonCraft Studio",
+      publisher: {
+        "@id": "https://www.horizoncraft.studio/#organization",
+      },
+      inLanguage: "en-IN",
+    },
+  ],
+};
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     // Replace these placeholders with the app's name and description when first building the app.
@@ -81,8 +126,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Horizoncraft Studio" },
-      { name: "description", content: "Independent 3D motion design studio." },
+      { title: "HorizonCraft Studio | 3D Product Animation & CGI" },
+      {
+        name: "description",
+        content:
+          "HorizonCraft Studio creates cinematic 3D product animations, product launch films, photorealistic product-page visuals and website hero animations for brands.",
+      },
     ],
     links: [
       {
@@ -113,6 +162,10 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body>
         {children}
