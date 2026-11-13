@@ -6,7 +6,7 @@ export const services = [
   },
   {
     title: "Product PDP",
-    text: "Every render, loop and detail view your product page needs.",
+    text: "Every 3D render, loop and detail view your product page needs.",
     showcase: "pdp",
   },
   {
