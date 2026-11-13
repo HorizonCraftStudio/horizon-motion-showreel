@@ -90,6 +90,10 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/G9aDGM9YRxU" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     <figcaption>Launch film <span>YouTube embed</span></figcaption>
                   </figure>
+                  <figure data-ready={Boolean(readyMedia["film3"])}>
+                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film3: true }))} src="https://www.youtube-nocookie.com/embed/Q8hsB0BFU1E" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                    <figcaption>Launch film <span>YouTube embed</span></figcaption>
+                  </figure>
                 </div>
               ) : (
                 <div className="showcase-images">
