@@ -87,8 +87,8 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                     <figcaption>Launch film <span>YouTube embed</span></figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film2"])}>
-                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/R6MlUcmOul8" title="Temporary film sample — Tears of Steel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
-                    <figcaption>Tears of Steel <span>Temporary film sample</span></figcaption>
+                    <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/G9aDGM9YRxU" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                    <figcaption>Launch film <span>YouTube embed</span></figcaption>
                   </figure>
                 </div>
               ) : (
