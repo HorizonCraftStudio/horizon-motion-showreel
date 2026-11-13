@@ -262,7 +262,6 @@ function Index() {
                     {service.showcase ? (
                       <Button variant="link" className="service-name-button" onClick={(event) => {
                         setSelection({ service, origin: event.currentTarget.getBoundingClientRect(), trigger: event.currentTarget });
-                        reelRef.current?.pause();
                       }}>{service.title}</Button>
                     ) : service.title}
                   </h3>
