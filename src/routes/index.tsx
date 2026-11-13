@@ -66,6 +66,7 @@ function Index() {
   const sequenceRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
   const [reelOn, setReelOn] = useState(false);
+  const [reelReady, setReelReady] = useState(false);
   const nextRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
@@ -205,10 +206,15 @@ function Index() {
           <div className="studio-reel" role="img" aria-label="Horizoncraft Studio 3D motion design showreel">
             {reelOn && (
               <iframe
+                className={reelReady ? "is-ready" : undefined}
                 src={studioReel.url}
                 title="Horizoncraft Studio showreel"
                 allow="autoplay; encrypted-media; picture-in-picture"
                 tabIndex={-1}
+                onLoad={() => {
+                  // Reveal only after YouTube's brief start-up chrome has faded.
+                  window.setTimeout(() => setReelReady(true), 2200);
+                }}
               />
             )}
           </div>
