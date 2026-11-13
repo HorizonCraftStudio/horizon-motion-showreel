@@ -8,21 +8,23 @@ import pdpEarbudsDark from "@/assets/pdp-earbuds-dark.webp.asset.json";
 import pdpEarbudsPixel from "@/assets/pdp-earbuds-pixel.webp.asset.json";
 import pdpHyphenSerum from "@/assets/pdp-hyphen-serum.png.asset.json";
 import pdpMieleWineCooler from "@/assets/pdp-miele-wine-cooler.png.asset.json";
-import pdpTabletStylus from "@/assets/pdp-tablet-stylus.webp.asset.json";
+import pdpBraveParallax from "@/assets/pdp-brave-parallax.png.asset.json";
 import pdpWatchBlue from "@/assets/pdp-watch-blue.png.asset.json";
 import pdpWatchOrange from "@/assets/pdp-watch-orange.png.asset.json";
 import type { ShowcaseService } from "@/lib/services";
 
 const pdpImages = [
-  { asset: pdpCaldigitDock, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
-  { asset: pdpEarbudsPixel, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1" },
-  { asset: pdpEarbudsDark, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2" },
-  { asset: pdpHyphenSerum, alt: "Four views of the Hyphen Power Peptides Cocktail Serum bottle with a lavender cap and blue serum, styled with glass beakers, test tubes and gel cubes", caption: "Hyphen serum" },
-  { asset: pdpWatchOrange, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Samsung GalaxyWatch#1" },
-  { asset: pdpTabletStylus, alt: "Tablet with stylus showing a digital painting app with a poppy artwork", caption: "Brave Parallax" },
-  { asset: pdpWatchBlue, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Samsung GalaxyWatch#2" },
-  { asset: pdpMieleWineCooler, alt: "Miele under-counter wine cooler shown from four angles with blue interior lighting and bottles on the shelves", caption: "Miele wine cooler" },
+  { asset: pdpCaldigitDock, aspect: 16 / 9, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
+  { asset: pdpHyphenSerum, aspect: 1, alt: "Four views of the Hyphen Power Peptides Cocktail Serum bottle with a lavender cap and blue serum, styled with glass beakers, test tubes and gel cubes", caption: "Hyphen serum" },
+  { asset: pdpBraveParallax, aspect: 1, alt: "Brave Parallax smart display in five views: a stylus painting app with red poppies, a height-adjustable stand profile, portrait video playback mirrored from a phone, stereo sound waves and a close-up of the port panel", caption: "Brave Parallax" },
+  { asset: pdpEarbudsDark, aspect: 16 / 9, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2" },
+  { asset: pdpEarbudsPixel, aspect: 16 / 9, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1" },
+  { asset: pdpMieleWineCooler, aspect: 1, alt: "Miele under-counter wine cooler shown from four angles with blue interior lighting and bottles on the shelves", caption: "Miele wine cooler" },
+  { asset: pdpWatchOrange, aspect: 16 / 9, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Samsung GalaxyWatch#1" },
+  { asset: pdpWatchBlue, aspect: 16 / 9, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Samsung GalaxyWatch#2" },
 ];
+
+const pdpRows = Array.from({ length: Math.ceil(pdpImages.length / 2) }, (_, row) => pdpImages.slice(row * 2, row * 2 + 2));
 
 export type ServiceSelection = { service: ShowcaseService; origin: DOMRect; trigger: HTMLButtonElement };
 
@@ -99,11 +101,18 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                 </div>
               ) : (
                 <div className="showcase-images">
-                  {pdpImages.map((image, i) => (
-                    <figure key={image.asset.url} data-ready={Boolean(readyMedia[`image${i}`])}>
-                      <img onLoad={() => setReadyMedia((ready) => ({ ...ready, [`image${i}`]: true }))} src={image.asset.url} alt={image.alt} loading="lazy" />
-                      <figcaption>{image.caption} <span>Product render</span></figcaption>
-                    </figure>
+                  {pdpRows.map((row, rowIndex) => (
+                    <div className="showcase-row" key={row.map((image) => image.caption).join("|")}>
+                      {row.map((image, columnIndex) => {
+                        const index = rowIndex * 2 + columnIndex;
+                        return (
+                          <figure key={image.asset.url} style={{ flexGrow: image.aspect }} data-ready={Boolean(readyMedia[`image${index}`])}>
+                            <img onLoad={() => setReadyMedia((ready) => ({ ...ready, [`image${index}`]: true }))} src={image.asset.url} alt={image.alt} loading="lazy" />
+                            <figcaption>{image.caption} <span>Product render</span></figcaption>
+                          </figure>
+                        );
+                      })}
+                    </div>
                   ))}
                 </div>
               )}
