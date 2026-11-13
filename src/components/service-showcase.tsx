@@ -97,7 +97,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                       <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/G9aDGM9YRxU" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     </div>
                     <figcaption>Kreo Arma
-3D Launch Film <span className="film-tag">3D launch film</span></figcaption>
+3D launch film</figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film3"])}>
                     <div className="film-frame">
