@@ -715,8 +715,6 @@
 }
 .showcase-media figure[data-ready="true"] { opacity: 1; }
 .film-frame { position: relative; }
-.film-controls { display: flex; align-items: center; gap: 4px; margin-top: 8px; color: var(--studio-ink); }
-.film-controls span { font-size: 12px; color: var(--studio-muted); }
 .film-tag {
   color: oklch(0.55 0.008 275);
   font-size: 11px;
@@ -725,7 +723,6 @@
   white-space: nowrap;
 }
 .showcase-films iframe {
-  pointer-events: none;
   width: 100%;
   aspect-ratio: 16 / 9;
   display: block;
