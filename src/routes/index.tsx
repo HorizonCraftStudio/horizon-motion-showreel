@@ -154,8 +154,7 @@ function Index() {
       header.style.setProperty("--pin", String(pin));
       header.style.setProperty("--reveal", String(eased * (1 - pin)));
 
-      // Warm up playback behind the opening logo so the settling period
-      // overlaps the intro instead of starting when the user reveals the reel.
+      // Start playback behind the opening logo to overlap loading with the intro.
       if (!reelActivated) {
         reelActivated = true;
         setReelOn(true);

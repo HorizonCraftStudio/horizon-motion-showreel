@@ -8,38 +8,31 @@ afterEach(() => {
   Reflect.deleteProperty(window, "YT");
 });
 
-describe("showreel playback readiness", () => {
-  it("waits for sustained playback rather than revealing after iframe load", async () => {
+describe("showreel playback startup", () => {
+  it("starts muted playback immediately when YouTube is ready without a settling timer", async () => {
     vi.useFakeTimers();
-    let changeState: ((event: { data: number }) => void) | undefined;
+    const mute = vi.fn();
+    const unloadModule = vi.fn();
+    const playVideo = vi.fn();
     const destroy = vi.fn();
     Object.assign(window, {
       YT: {
         Player: class {
           constructor(_iframe: HTMLIFrameElement, options: {
-            events: { onStateChange(event: { data: number }): void };
+            events: { onReady(event: { target: { mute(): void; unloadModule(module: string): void; playVideo(): void } }): void };
           }) {
-            changeState = options.events.onStateChange;
+            options.events.onReady({ target: { mute, unloadModule, playVideo } });
           }
           destroy = destroy;
         },
       },
     });
-    const { container, unmount } = render(<ShowreelPlayer />);
+    const { unmount } = render(<ShowreelPlayer />);
     await act(async () => {});
-    const iframe = container.querySelector("iframe");
-    if (!iframe || !changeState) throw new Error("Player did not mount");
-    const state = changeState;
-    act(() => { vi.advanceTimersByTime(10000); });
-    expect(iframe.classList.contains("is-ready")).toBe(false);
-    act(() => { state({ data: 1 }); vi.advanceTimersByTime(1000); });
-    expect(iframe.classList.contains("is-ready")).toBe(false);
-    act(() => { state({ data: 3 }); vi.advanceTimersByTime(5000); });
-    expect(iframe.classList.contains("is-ready")).toBe(false);
-    act(() => { state({ data: 1 }); vi.advanceTimersByTime(4000); });
-    expect(iframe.classList.contains("is-ready")).toBe(true);
-    act(() => { state({ data: 2 }); });
-    expect(iframe.classList.contains("is-ready")).toBe(false);
+    expect(mute).toHaveBeenCalledOnce();
+    expect(unloadModule).toHaveBeenCalledWith("captions");
+    expect(playVideo).toHaveBeenCalledOnce();
+    expect(vi.getTimerCount()).toBe(0);
     unmount();
     expect(destroy).toHaveBeenCalledOnce();
   });
