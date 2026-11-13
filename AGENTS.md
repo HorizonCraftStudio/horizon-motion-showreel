@@ -31,5 +31,5 @@ use the editor.
 
 - Keep the studio’s animated logo-to-showreel introduction within the home page so its scroll transition remains continuous.
 - Keep service showcases in a full-screen modal on the home page, with service eligibility in the shared service list, so closing preserves the continuous intro and scroll position.
-- Keep the showreel visible without a playback-settling wait; use the YouTube IFrame API only to start muted playback and disable captions, so buffering never adds an artificial reveal delay.
+- Keep the showreel visible without a playback-settling wait; use the YouTube IFrame API to start muted playback, disable captions, and recover pauses or tab returns so buffering never adds an artificial reveal delay. Scope recovery to the showreel, not launch films.
 - Use standard YouTube embeds without autoplay for launch films; keep their URL options in a shared helper so every film follows the same playback settings.
