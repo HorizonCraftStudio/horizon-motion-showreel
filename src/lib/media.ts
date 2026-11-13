@@ -6,7 +6,10 @@ export const kreoLogo = { url: "/media/kreo-logo.webp" };
 export const mortCoLogo = { url: "/media/mort-co-logo.webp" };
 export const qalzyLogo = { url: "/media/qalzy-logo.webp" };
 export const studioMark = { url: "/media/horizoncraft-mark.webp" };
-export const studioReel = { url: "https://id-preview--a49cf292-9c8b-4ca5-ba01-5ab237530418.lovable.app/__l5e/assets-v1/5018587f-7130-43bf-a9e6-f60a10d00717/horizoncraft-showreel.mp4" };
+// Clean chromeless YouTube loop: autoplay muted, no controls, same-video loop.
+export const studioReel = {
+  url: "https://www.youtube-nocookie.com/embed/GycEAjcRCBM?autoplay=1&mute=1&loop=1&playlist=GycEAjcRCBM&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3",
+};
 export const pdpCaldigitDock = { url: "/media/pdp-caldigit-dock.webp" };
 export const pdpEarbudsDark = { url: "/media/pdp-earbuds-dark.webp" };
 export const pdpEarbudsPixel = { url: "/media/pdp-earbuds-pixel.webp" };

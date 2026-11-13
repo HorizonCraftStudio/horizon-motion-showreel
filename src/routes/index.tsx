@@ -65,7 +65,7 @@ function Index() {
   const [selection, setSelection] = useState<ServiceSelection | null>(null);
   const sequenceRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
-  const reelRef = useRef<HTMLVideoElement>(null);
+  const [reelOn, setReelOn] = useState(false);
   const nextRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const pageRef = useRef<HTMLElement>(null);
@@ -122,13 +122,12 @@ function Index() {
   useEffect(() => {
     const sequence = sequenceRef.current;
     const brand = brandRef.current;
-    const reel = reelRef.current;
     const header = headerRef.current;
-    if (!sequence || !brand || !reel || !header) return;
+    if (!sequence || !brand || !header) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frameId = 0;
-    let isPlaying = false;
+    let reelActivated = false;
 
     const render = () => {
       frameId = 0;
@@ -155,14 +154,11 @@ function Index() {
       header.style.setProperty("--pin", String(pin));
       header.style.setProperty("--reveal", String(eased * (1 - pin)));
 
-      if (eased > 0.4 && !isPlaying) {
-        isPlaying = true;
-        void reel.play().catch(() => {
-          isPlaying = false;
-        });
-      } else if (eased <= 0.4 && isPlaying) {
-        reel.pause();
-        isPlaying = false;
+      // Mount the YouTube embed only once the reel starts revealing;
+      // its autoplay then begins playback on its own.
+      if (eased > 0.4 && !reelActivated) {
+        reelActivated = true;
+        setReelOn(true);
       }
     };
 
@@ -180,7 +176,6 @@ function Index() {
       window.removeEventListener("resize", scheduleRender);
       reducedMotion.removeEventListener("change", scheduleRender);
       if (frameId !== 0) window.cancelAnimationFrame(frameId);
-      reel.pause();
     };
   }, []);
 
@@ -207,17 +202,16 @@ function Index() {
       </header>
       <section className="studio-sequence" ref={sequenceRef} aria-label="Horizoncraft Studio">
         <div className="studio-stage">
-          <video
-            className="studio-reel"
-            ref={reelRef}
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label="Horizoncraft Studio 3D motion design showreel"
-          >
-            <source src={studioReel.url} type="video/mp4" />
-          </video>
+          <div className="studio-reel" role="img" aria-label="Horizoncraft Studio 3D motion design showreel">
+            {reelOn && (
+              <iframe
+                src={studioReel.url}
+                title="Horizoncraft Studio showreel"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                tabIndex={-1}
+              />
+            )}
+          </div>
           <div className="reel-shade" aria-hidden="true" />
 
 
