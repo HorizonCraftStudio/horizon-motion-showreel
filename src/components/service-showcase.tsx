@@ -16,12 +16,12 @@ import type { ShowcaseService } from "@/lib/services";
 const pdpImages = [
   { asset: pdpCaldigitDock, aspect: 16 / 9, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
   { asset: pdpHyphenSerum, aspect: 1, alt: "Four views of the Hyphen Power Peptides Cocktail Serum bottle with a lavender cap and blue serum, styled with glass beakers, test tubes and gel cubes", caption: "Hyphen serum" },
-  { asset: pdpBraveParallax, aspect: 1, alt: "Brave Parallax smart display in five views: a stylus painting app with red poppies, a height-adjustable stand profile, portrait video playback mirrored from a phone, stereo sound waves and a close-up of the port panel", caption: "Brave Parallax" },
-  { asset: pdpEarbudsDark, aspect: 16 / 9, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2" },
-  { asset: pdpEarbudsPixel, aspect: 16 / 9, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1" },
-  { asset: pdpMieleWineCooler, aspect: 1, alt: "Miele under-counter wine cooler shown from four angles with blue interior lighting and bottles on the shelves", caption: "Miele wine cooler" },
-  { asset: pdpWatchOrange, aspect: 16 / 9, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Samsung GalaxyWatch#1" },
-  { asset: pdpWatchBlue, aspect: 16 / 9, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Samsung GalaxyWatch#2" },
+  { asset: pdpBraveParallax, aspect: 1, alt: "Brave Parallax smart display in five views: a stylus painting app with red poppies, a height-adjustable stand profile, portrait video playback mirrored from a phone, stereo sound waves and a close-up of the port panel", caption: "Brave Parallax", tag: "3D Product PDP" },
+  { asset: pdpEarbudsDark, aspect: 16 / 9, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2", tag: "3D Product render" },
+  { asset: pdpEarbudsPixel, aspect: 16 / 9, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1", tag: "3D Product render" },
+  { asset: pdpMieleWineCooler, aspect: 1, alt: "Miele under-counter wine cooler shown from four angles with blue interior lighting and bottles on the shelves", caption: "Miele wine cooler", tag: "3D Product PDP" },
+  { asset: pdpWatchOrange, aspect: 16 / 9, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Samsung Galaxy Watch Ultra", tag: "3D Product render" },
+  { asset: pdpWatchBlue, aspect: 16 / 9, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Samsung Galaxy Watch 4", tag: "3D Product render" },
 ];
 
 const pdpRows = Array.from({ length: Math.ceil(pdpImages.length / 2) }, (_, row) => pdpImages.slice(row * 2, row * 2 + 2));
@@ -115,7 +115,7 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                         return (
                           <figure key={image.asset.url} style={{ flexGrow: image.aspect }} data-ready={Boolean(readyMedia[`image${index}`])}>
                             <img onLoad={() => setReadyMedia((ready) => ({ ...ready, [`image${index}`]: true }))} src={image.asset.url} alt={image.alt} loading="lazy" />
-                            <figcaption>{image.caption} <span>Product render</span></figcaption>
+                            <figcaption>{image.caption} <span>{image.tag ?? "3D Product render"}</span></figcaption>
                           </figure>
                         );
                       })}
