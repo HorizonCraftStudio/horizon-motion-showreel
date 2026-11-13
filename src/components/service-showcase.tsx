@@ -89,24 +89,21 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                   <figure data-ready={Boolean(readyMedia["film1"])}>
                     <div className="film-frame">
                       <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/qYks1zCuC28" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                      <span className="film-tag">3D launch film</span>
                     </div>
-                    <figcaption>KQi Air X </figcaption>
+                    <figcaption>KQi Air X <span className="film-tag">3D launch film</span></figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film2"])}>
                     <div className="film-frame">
                       <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/G9aDGM9YRxU" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                      <span className="film-tag">3D launch film</span>
                     </div>
                     <figcaption>Kreo Arma
-3D Launch Film</figcaption>
+3D Launch Film <span className="film-tag">3D launch film</span></figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film3"])}>
                     <div className="film-frame">
                       <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film3: true }))} src="https://www.youtube-nocookie.com/embed/Q8hsB0BFU1E" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                      <span className="film-tag">3D launch film</span>
                     </div>
-                    <figcaption>Brave Parallax</figcaption>
+                    <figcaption>Brave Parallax <span className="film-tag">3D launch film</span></figcaption>
                   </figure>
                 </div>
               ) : (

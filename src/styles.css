@@ -708,16 +708,11 @@
 .showcase-media figure[data-ready="true"] { opacity: 1; }
 .film-frame { position: relative; }
 .film-tag {
-  background: oklch(0.16 0.01 275 / 62%);
-  bottom: 62px;
-  color: oklch(0.84 0.006 275);
+  color: oklch(0.55 0.008 275);
   font-size: 11px;
   letter-spacing: 0.05em;
-  line-height: 1;
-  padding: 5px 9px;
-  pointer-events: none;
-  position: absolute;
-  right: 12px;
+  margin-left: auto;
+  white-space: nowrap;
 }
 .showcase-films iframe {
   width: 100%;
@@ -742,7 +737,7 @@
   .showcase-body { padding: 24px 18px 40px; }
   .showcase-title { font-size: 36px; margin-bottom: 32px; }
   .showcase-films { grid-template-columns: 1fr; gap: 32px; }
-  .film-tag { bottom: 48px; font-size: 10px; padding: 4px 7px; right: 8px; }
+  .film-tag { font-size: 10px; }
   .showcase-images { gap: 32px; }
   .showcase-row { flex-direction: column; gap: 32px; }
   .showcase-row figure { flex-basis: auto; width: 100%; }
