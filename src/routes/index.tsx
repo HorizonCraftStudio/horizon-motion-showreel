@@ -224,7 +224,7 @@ function Index() {
           <div className="reel-caption">
             <span className="caption-index">Independent studio</span>
             <p>
-              Horizoncraft Studio is dedicated to bringing new innovations infront of people before they miss it.
+              Horizoncraft Studio is dedicated to bringing new innovations infront of people through high quality 3D production and creative direction.
             </p>
           </div>
           <span className="frame-count" aria-hidden="true">
