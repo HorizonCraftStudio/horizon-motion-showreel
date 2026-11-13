@@ -88,17 +88,16 @@ export function ServiceShowcase({ selection, onClose, onLogo }: {
                 <div className="showcase-films">
                   <figure data-ready={Boolean(readyMedia["film1"])}>
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film1: true }))} src="https://www.youtube-nocookie.com/embed/qYks1zCuC28" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                    <figcaption>KQi Air X 
-3D Launch Film</figcaption>
+                    <figcaption>KQi Air X </figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film2"])}>
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film2: true }))} src="https://www.youtube-nocookie.com/embed/G9aDGM9YRxU" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                    <figcaption>Kreo Arma Launch film <span>3D Launch Film</span></figcaption>
+                    <figcaption>Kreo Arma
+3D Launch Film</figcaption>
                   </figure>
                   <figure data-ready={Boolean(readyMedia["film3"])}>
                     <iframe onLoad={() => setReadyMedia((ready) => ({ ...ready, film3: true }))} src="https://www.youtube-nocookie.com/embed/Q8hsB0BFU1E" title="Product launch film sample" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-                    <figcaption>Brave Parallax
-3D Launch Film</figcaption>
+                    <figcaption>Brave Parallax</figcaption>
                   </figure>
                 </div>
               ) : (
