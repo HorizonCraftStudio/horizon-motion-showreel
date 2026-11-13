@@ -32,11 +32,11 @@ describe("showreel playback readiness", () => {
     const state = changeState;
     act(() => { vi.advanceTimersByTime(10000); });
     expect(iframe.classList.contains("is-ready")).toBe(false);
-    act(() => { state({ data: 1 }); vi.advanceTimersByTime(3000); });
+    act(() => { state({ data: 1 }); vi.advanceTimersByTime(1000); });
     expect(iframe.classList.contains("is-ready")).toBe(false);
     act(() => { state({ data: 3 }); vi.advanceTimersByTime(5000); });
     expect(iframe.classList.contains("is-ready")).toBe(false);
-    act(() => { state({ data: 1 }); vi.advanceTimersByTime(4000); });
+    act(() => { state({ data: 1 }); vi.advanceTimersByTime(1500); });
     expect(iframe.classList.contains("is-ready")).toBe(true);
     act(() => { state({ data: 2 }); });
     expect(iframe.classList.contains("is-ready")).toBe(false);
