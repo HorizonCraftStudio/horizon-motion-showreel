@@ -6,7 +6,7 @@ import studioMark from "@/assets/horizoncraft-mark.png.asset.json";
 import pdpCaldigitDock from "@/assets/pdp-caldigit-dock.webp.asset.json";
 import pdpEarbudsDark from "@/assets/pdp-earbuds-dark.webp.asset.json";
 import pdpEarbudsPixel from "@/assets/pdp-earbuds-pixel.webp.asset.json";
-import pdpHyphenSerum from "@/assets/pdp-hyphen-serum.webp.asset.json";
+import pdpHyphenSerum from "@/assets/pdp-hyphen-serum.png.asset.json";
 import pdpMieleWineCooler from "@/assets/pdp-miele-wine-cooler.png.asset.json";
 import pdpTabletStylus from "@/assets/pdp-tablet-stylus.webp.asset.json";
 import pdpWatchBlue from "@/assets/pdp-watch-blue.png.asset.json";
@@ -17,7 +17,7 @@ const pdpImages = [
   { asset: pdpCaldigitDock, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
   { asset: pdpEarbudsPixel, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1" },
   { asset: pdpEarbudsDark, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2" },
-  { asset: pdpHyphenSerum, alt: "Hyphen Power Peptides Cocktail Serum bottle standing among glass test tubes with blue liquid", caption: "Hyphen serum" },
+  { asset: pdpHyphenSerum, alt: "Four views of the Hyphen Power Peptides Cocktail Serum bottle with a lavender cap and blue serum, styled with glass beakers, test tubes and gel cubes", caption: "Hyphen serum" },
   { asset: pdpWatchOrange, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Samsung GalaxyWatch#1" },
   { asset: pdpTabletStylus, alt: "Tablet with stylus showing a digital painting app with a poppy artwork", caption: "Brave Parallax" },
   { asset: pdpWatchBlue, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Samsung GalaxyWatch#2" },
