@@ -14,12 +14,12 @@ import type { ShowcaseService } from "@/lib/services";
 
 const pdpImages = [
   { asset: pdpCaldigitDock, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
-  { asset: pdpEarbudsPixel, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Wireless earbuds" },
-  { asset: pdpEarbudsDark, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Wireless earbuds" },
+  { asset: pdpEarbudsPixel, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1" },
+  { asset: pdpEarbudsDark, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2" },
   { asset: pdpHyphenSerum, alt: "Hyphen Power Peptides Cocktail Serum bottle standing among glass test tubes with blue liquid", caption: "Hyphen serum" },
-  { asset: pdpWatchOrange, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Smartwatch" },
-  { asset: pdpTabletStylus, alt: "Tablet with stylus showing a digital painting app with a poppy artwork", caption: "Tablet and stylus" },
-  { asset: pdpWatchBlue, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Smartwatch" },
+  { asset: pdpWatchOrange, alt: "Smartwatch with orange strap lit by warm orange light", caption: "Samsung GalaxyWatch#1" },
+  { asset: pdpTabletStylus, alt: "Tablet with stylus showing a digital painting app with a poppy artwork", caption: "Brave Parallax" },
+  { asset: pdpWatchBlue, alt: "Smartwatch with blue strap against a starry night sky with a bright lens flare", caption: "Samsung GalaxyWatch#2" },
 ];
 
 export type ServiceSelection = { service: ShowcaseService; origin: DOMRect; trigger: HTMLButtonElement };
