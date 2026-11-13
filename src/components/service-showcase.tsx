@@ -17,7 +17,7 @@ import type { ShowcaseService } from "@/lib/services";
 const pdpImages = [
   { asset: pdpCaldigitDock, aspect: 16 / 9, alt: "Silver CalDigit docking station with USB-C and SD card ports on a reflective surface", caption: "CalDigit dock" },
   { asset: pdpHyphenSerum, aspect: 1, alt: "Four views of the Hyphen Power Peptides Cocktail Serum bottle with a lavender cap and blue serum, styled with glass beakers, test tubes and gel cubes", caption: "Hyphen serum" },
-  { asset: pdpBraveParallax, aspect: 1, alt: "Brave Parallax smart display in five views: a stylus painting app with red poppies, a height-adjustable stand profile, portrait video playback mirrored from a phone, stereo sound waves and a close-up of the port panel", caption: "Brave Parallax", tag: "3D Product PDP" },
+  { asset: pdpBraveParallax, aspect: 1, alt: "Brave Parallax smart display in five views: a stylus painting app with red poppies, a height-adjustable stand profile, wireless video casting from a phone, stereo sound waves and a close-up of the front camera bezel", caption: "Brave Parallax", tag: "3D Product PDP" },
   { asset: pdpEarbudsDark, aspect: 16 / 9, alt: "Transparent wireless earbuds floating over a dark blue surface with water droplets", caption: "Visual RnD#2", tag: "3D Product render" },
   { asset: pdpEarbudsPixel, aspect: 16 / 9, alt: "Transparent wireless earbuds dissolving into pixels on a white background", caption: "Visual RnD#1", tag: "3D Product render" },
   { asset: pdpMieleWineCooler, aspect: 1, alt: "Miele under-counter wine cooler shown from four angles with blue interior lighting and bottles on the shelves", caption: "Miele wine cooler", tag: "3D Product PDP" },
